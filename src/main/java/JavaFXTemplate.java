@@ -33,6 +33,8 @@ import javafx.util.Duration;
 public class JavaFXTemplate extends Application {
 	Stage window;
 	Scene scene1,scene2,scene3,scene4,scene5,currentScene;
+	public static TextArea t2;
+	public static Stage stage;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -76,11 +78,36 @@ public class JavaFXTemplate extends Application {
 		window.setTitle("KENO");
 		window.show();
 
+		//@Override
+		//public void start(Stage primaryStage) throws Exception {
+		//	// TODO Auto-generated method stub
+		//	primaryStage.setTitle("Welcome to Win or Go Home");
+		//	stage = primaryStage;
+		//	Button Start = new Button("Start");
 
+		//	BorderPane root = new BorderPane();
+		//	root.setBottom(Start);
+		//	root.setStyle("-fx-background-color: orange");
+		//}
 
-		
-				
-		
+		Start.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				Scene scene = new Scene(root, 700,700);
+
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			}
+
+			public static void transitionToGameScreen(){
+				PauseTransition pause = new PauseTransition(Duration.seconds(1));
+
+				BorderPane b = new BorderPane();
+
+				VBox playerVBox = new VBox();
+				Text playerVBoxTitle = new Text("How many Spots?");
+			}
 	}
 
 }
+
