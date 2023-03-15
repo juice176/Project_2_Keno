@@ -32,7 +32,7 @@ import javafx.util.Duration;
 
 public class JavaFXTemplate extends Application {
 	Stage window;
-	Scene scene1,scene2,scene3,currentScene;
+	Scene scene1,scene2,scene3,scene4,scene5,currentScene;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
