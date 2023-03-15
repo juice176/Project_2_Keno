@@ -3,7 +3,7 @@ import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
-
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -74,30 +75,23 @@ public class JavaFXTemplate extends Application {
 
 		layout.setStyle("-fx-padding:10px;");
 		layout.getChildren().addAll(menu, welcomeText, button1);
+		//scene2
+		BorderPane borderPane = new BorderPane();
 
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
 		window.show();
-
-		button1.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				Scene scene2 = new Scene(layout, 700, 700);
-
-				primaryStage.setScene(scene2);
-				primaryStage.show();
-			}
-
-			public void transitionToGameScreen() {
-				PauseTransition pause = new PauseTransition(Duration.seconds(1));
-
-				BorderPane b = new BorderPane();
-
-				VBox playerVBox = new VBox();
-				Text playerVBoxTitle = new Text("How many Spots?");
-			}
+		exit.setOnAction((ActionEvent event)-> {Platform.exit();});
+		button1.setOnAction((ActionEvent event)->{
+			Scene scene2 = new Scene(borderPane, 700, 700);
+			 window.setScene(scene2);
+			 borderPane.getChildren().addAll(menu);
 		});
+
+
 	}
+
+
 }
 
