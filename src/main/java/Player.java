@@ -47,4 +47,20 @@ public class Player {
         spot = 0;
         totalWinnings = 0;
     }
+
+    private int value;
+
+    public Card(int value) {
+        this.value = value;
+    }
+
+
+    public void set_Value(int value) {
+        this.value = value;
+    }
+
+    public int get_value( )  {
+        return this.value;
+    }
+
 }
