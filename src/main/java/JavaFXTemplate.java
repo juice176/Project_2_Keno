@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -32,9 +33,10 @@ import javafx.util.Duration;
 
 public class JavaFXTemplate extends Application {
 	Stage window;
-	Scene scene1,scene2,scene3,scene4,scene5,currentScene;
-	public static TextArea t2;
+	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
+	//public static TextArea t2;
 	public static Stage stage;
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -44,12 +46,12 @@ public class JavaFXTemplate extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		primaryStage.setTitle("Welcome to Keno");
+		primaryStage.setTitle("Welcome to Win or Go Home");
 
 		window = primaryStage;
 		//scene1
 		VBox layout = new VBox(10);
-		scene1 = new Scene(layout,800,640);
+		scene1 = new Scene(layout, 800, 640);
 
 		//Menu
 		Menu rulesMenu = new Menu("Rules");
@@ -57,7 +59,7 @@ public class JavaFXTemplate extends Application {
 		Menu exit = new Menu("Exit");
 
 		MenuBar menuBar = new MenuBar();
-		menuBar.getMenus().addAll(rulesMenu,winOddsMenu,exit);
+		menuBar.getMenus().addAll(rulesMenu, winOddsMenu, exit);
 
 		HBox menu = new HBox(20);
 		menu.getChildren().add(menuBar);
@@ -78,28 +80,16 @@ public class JavaFXTemplate extends Application {
 		window.setTitle("KENO");
 		window.show();
 
-		//@Override
-		//public void start(Stage primaryStage) throws Exception {
-		//	// TODO Auto-generated method stub
-		//	primaryStage.setTitle("Welcome to Win or Go Home");
-		//	stage = primaryStage;
-		//	Button Start = new Button("Start");
-
-		//	BorderPane root = new BorderPane();
-		//	root.setBottom(Start);
-		//	root.setStyle("-fx-background-color: orange");
-		//}
-
-		Start.setOnAction(new EventHandler<ActionEvent>() {
+		button1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				Scene scene = new Scene(root, 700,700);
+				Scene scene2 = new Scene(layout, 700, 700);
 
-				primaryStage.setScene(scene);
+				primaryStage.setScene(scene2);
 				primaryStage.show();
 			}
 
-			public static void transitionToGameScreen(){
+			public void transitionToGameScreen() {
 				PauseTransition pause = new PauseTransition(Duration.seconds(1));
 
 				BorderPane b = new BorderPane();
@@ -107,7 +97,7 @@ public class JavaFXTemplate extends Application {
 				VBox playerVBox = new VBox();
 				Text playerVBoxTitle = new Text("How many Spots?");
 			}
+		});
 	}
-
 }
 
