@@ -1,7 +1,9 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
@@ -66,8 +68,11 @@ public class JavaFXTemplate extends Application {
 		layout.setStyle("-fx-padding:10px;");
 		layout.getChildren().addAll(menu, welcomeText, button1);
 		//scene2
-		BorderPane borderPane = new BorderPane();
-		scene2 = new Scene(borderPane,800,600);
+		//BorderPane borderPane = new BorderPane();
+		//GridPane borderPane = new GridPane();
+		VBox borderPane = new VBox(10);
+		scene2 = new Scene(borderPane, 800, 640);
+		//scene2 = new Scene(borderPane,800,600);
 		borderPane.setStyle("-fx-padding:10px;");
 		Menu rulesMenu2 = new Menu("Rules");
 		Menu winOddsMenu2 = new Menu("Odds");
@@ -86,6 +91,7 @@ public class JavaFXTemplate extends Application {
 
 		HBox menu2 = new HBox(20);
 		menu2.getChildren().add(menuBar2);
+//		menu2.setAlignment(Pos.TOP_LEFT);
 
 		// updates:
 		// asks user to pick spots
@@ -99,10 +105,16 @@ public class JavaFXTemplate extends Application {
 		Button amount8 = new Button("8");
 		Button amount10 = new Button("10");
 
-		amount1.setOnAction(e -> Player.set_Value(1));
-		amount4.setOnAction(e -> Player.set_Value(4));
-		amount8.setOnAction(e -> Player.set_Value(8));
-		amount10.setOnAction(e -> Player.set_Value(10));
+//		GridPane screen_layout = new GridPane();
+
+		borderPane.setAlignment(Pos.TOP_LEFT);
+		GridPane.setHalignment(amount1, HPos.CENTER);
+		GridPane.setValignment(amount1, VPos.CENTER);
+
+		//amount1.setOnAction(e -> Player.set_Value(1));
+		//amount4.setOnAction(e -> Player.set_Value(4));
+		//amount8.setOnAction(e -> Player.set_Value(8));
+		//amount10.setOnAction(e -> Player.set_Value(10));
 
 		HBox amountBox = new HBox(20, amount1, amount4, amount8,amount10);
 
@@ -118,6 +130,7 @@ public class JavaFXTemplate extends Application {
 
 		Button save = new Button("Next");
 		save.setOnAction(e -> window.setScene(scene3));
+		//layout2.getChildren().addAll(menu2);
 		borderPane.getChildren().addAll(menu2,save,amountBox);
 		// need a function to save results
 
