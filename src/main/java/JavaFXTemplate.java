@@ -1,28 +1,22 @@
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import java.util.ArrayList;
 
 
 public class JavaFXTemplate extends Application {
-	private List<values> selectNumbers = new ArrayList<>();
-
+	private ArrayList<Integer> selectNumbers = new ArrayList<>();
 	Stage window;
 	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
 	//public static TextArea t2;
@@ -48,13 +42,19 @@ public class JavaFXTemplate extends Application {
 		Menu rulesMenu = new Menu("Rules");
 		Menu winOddsMenu = new Menu("Odds");
 		Menu exit = new Menu("Exit");
+		MenuItem exitconfirm = new MenuItem("Exit Confirm");
+		MenuItem ruleConfirm = new MenuItem("Rules Confirm");
+		MenuItem winOddsConfirm = new MenuItem("Odds Confirm");
 
+		exit.getItems().add(exitconfirm);
+		winOddsMenu.getItems().add(winOddsConfirm);
+		rulesMenu.getItems().add(ruleConfirm);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(rulesMenu, winOddsMenu, exit);
 
 		HBox menu = new HBox(20);
 		menu.getChildren().add(menuBar);
-
+		exit.setOnAction((ActionEvent event)-> {Platform.exit();});
 
 		Button button1 = new Button("Play");
 		button1.setOnAction(e -> window.setScene(scene2));
@@ -67,36 +67,62 @@ public class JavaFXTemplate extends Application {
 		layout.getChildren().addAll(menu, welcomeText, button1);
 		//scene2
 		BorderPane borderPane = new BorderPane();
+		scene2 = new Scene(borderPane,800,600);
+		borderPane.setStyle("-fx-padding:10px;");
+		Menu rulesMenu2 = new Menu("Rules");
+		Menu winOddsMenu2 = new Menu("Odds");
+		Menu exit2 = new Menu("Exit");
 
-		window.setScene(scene1);
-		window.setTitle("KENO");
-		window.show();
-		exit.setOnAction((ActionEvent event)-> {Platform.exit();});
-		button1.setOnAction((ActionEvent event)->{
-			Scene scene2 = new Scene(borderPane, 700, 700);
-			window.setScene(scene2);
-			borderPane.getChildren().addAll(menu);
-		});
+		MenuItem exitconfirm2 = new MenuItem("Exit Confirm");
+		MenuItem ruleConfirm2 = new MenuItem("Rules Confirm");
+		MenuItem winOddsConfirm2 = new MenuItem("Odds Confirm");
+
+		exit2.getItems().add(exitconfirm2);
+		winOddsMenu2.getItems().add(winOddsConfirm2);
+		rulesMenu2.getItems().add(ruleConfirm2);
+
+		MenuBar menuBar2 = new MenuBar();
+		menuBar2.getMenus().addAll(rulesMenu2, winOddsMenu2, exit2);
+
+		HBox menu2 = new HBox(20);
+		menu2.getChildren().add(menuBar2);
 
 		// updates:
 		// asks user to pick spots
 		Label spots = new Label("How many spots?");
-		ComboBox<values> spots_txt = new ComboBox<>();
-		spots_txt.getItems().addAll(1, 4, 8, 10);
+
+//		ComboBox<Integer> spots_txt = new ComboBox<>();
+//		spots_txt.getItems().addAll(1, 4, 8, 10);
+		//version 2
+		Button amount1 = new Button("1");
+		Button amount4 = new Button("4");
+		Button amount8 = new Button("8");
+		Button amount10 = new Button("10");
+
+		amount1.setOnAction(e -> Player.set_Value(1));
+		amount4.setOnAction(e -> Player.set_Value(4));
+		amount8.setOnAction(e -> Player.set_Value(8));
+		amount10.setOnAction(e -> Player.set_Value(10));
+
+		HBox amountBox = new HBox(20, amount1, amount4, amount8,amount10);
 
 		// then asks users to place bet
 		Label bets = new Label("How much do you want to bet?");
-		ComboBox<values> bets_txt = new ComboBox<>();
-		bets_txt.getItems().addAll("$1", "$2", "$3", "$4", "$5", "$10", "$15", "$20);
+		ComboBox<String> bets_txt = new ComboBox<>();
+		bets_txt.getItems().addAll("$1", "$2", "$3", "$4", "$5", "$10", "$15", "$20");
 
-		// then asks users to pick number of games
+				// then asks users to pick number of games
 		Label games = new Label("How many games do you want to play?");
-		ComboBox<values> games_txt = new ComboBox<>();
+		ComboBox<Integer> games_txt = new ComboBox<>();
 		games_txt.getItems().addAll(1, 2, 3, 4, 5, 10, 15, 20);
 
 		Button save = new Button("Next");
+		save.setOnAction(e -> window.setScene(scene3));
+		borderPane.getChildren().addAll(menu2,save,amountBox);
 		// need a function to save results
-		save.setOnAction(event -> results()));
+
+
+		//save.setOnAction(event -> Player.storecardSelection());
 
 		// next screen displays grid and options
 		GridPane grid_screen = new GridPane();
@@ -104,7 +130,7 @@ public class JavaFXTemplate extends Application {
 		grid_screen.setHgap(10);
 		grid_screen.setVgap(10);
 		grid_screen.add(spots, 0, 0);
-		grid_screen.add(spots_txt, 1, 0);
+		//grid_screen.add(spots_txt, 1, 0);
 		grid_screen.add(bets, 0, 1);
 		grid_screen.add(bets_txt, 1, 1);
 		grid_screen.add(games, 0, 2);
@@ -122,17 +148,20 @@ public class JavaFXTemplate extends Application {
 		for (int i = 1; i <= 80; i++) {
 			Button num_select = new Button(String.valueOf(i));
 			num_select.setPrefSize(50, 50);
-			num_select.setOnAction(event -> select_function(num_select));
+			//num_select.setOnAction(event -> select_function(num_select));
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
 		}
 		// need function that displays for numbers that are selected
 		Button next = new Button("Next");
-		next.setOnAction(event -> display_numbers(primaryStage));
+		//next.setOnAction(event -> display_numbers(primaryStage));
 
 		VBox pickScreen = new VBox(10);
 		pickScreen.setAlignment(Pos.CENTER);
 		pickScreen.getChildren().addAll(spots, num, next);
 
+		window.setScene(scene1);
+		window.setTitle("KENO");
+		window.show();
 	}
 	// things needed still:
 	// function for randomizing the numbers
@@ -146,3 +175,4 @@ public class JavaFXTemplate extends Application {
 
 
 }
+
