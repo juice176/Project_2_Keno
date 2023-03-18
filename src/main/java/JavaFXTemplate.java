@@ -73,7 +73,7 @@ public class JavaFXTemplate extends Application {
 		VBox borderPane = new VBox(10);
 		scene2 = new Scene(borderPane, 800, 640);
 		//scene2 = new Scene(borderPane,800,600);
-		borderPane.setStyle("-fx-padding:10px;");
+		//borderPane.setStyle("-fx-padding:10px;");
 		Menu rulesMenu2 = new Menu("Rules");
 		Menu winOddsMenu2 = new Menu("Odds");
 		Menu exit2 = new Menu("Exit");
@@ -111,27 +111,70 @@ public class JavaFXTemplate extends Application {
 		GridPane.setHalignment(amount1, HPos.CENTER);
 		GridPane.setValignment(amount1, VPos.CENTER);
 
-		//amount1.setOnAction(e -> Player.set_Value(1));
-		//amount4.setOnAction(e -> Player.set_Value(4));
-		//amount8.setOnAction(e -> Player.set_Value(8));
-		//amount10.setOnAction(e -> Player.set_Value(10));
+		amount1.setOnAction(e -> Player.set_Value(1));
+		amount4.setOnAction(e -> Player.set_Value(4));
+		amount8.setOnAction(e -> Player.set_Value(8));
+		amount10.setOnAction(e -> Player.set_Value(10));
 
 		HBox amountBox = new HBox(20, amount1, amount4, amount8,amount10);
 
 		// then asks users to place bet
 		Label bets = new Label("How much do you want to bet?");
-		ComboBox<String> bets_txt = new ComboBox<>();
-		bets_txt.getItems().addAll("$1", "$2", "$3", "$4", "$5", "$10", "$15", "$20");
+		Button bet1 = new Button("$1");
+		Button bet2 = new Button("$2");
+		Button bet3 = new Button("$3");
+		Button bet4 = new Button("$4");
+		Button bet5 = new Button("$5");
+		Button bet10 = new Button("$10");
+		Button bet15 = new Button("$15");
+		Button bet20 = new Button("$20");
 
-				// then asks users to pick number of games
+		GridPane.setHalignment(bet1, HPos.CENTER);
+		GridPane.setValignment(bet1, VPos.CENTER);
+
+		bet1.setOnAction(e->Player.set_Value(1));
+		bet2.setOnAction(e->Player.set_Value(2));
+		bet3.setOnAction(e->Player.set_Value(3));
+		bet4.setOnAction(e->Player.set_Value(4));
+		bet5.setOnAction(e->Player.set_Value(5));
+		bet10.setOnAction(e->Player.set_Value(10));
+		bet15.setOnAction(e->Player.set_Value(15));
+		bet20.setOnAction(e->Player.set_Value(20));
+		HBox betBox = new HBox(20, bet1, bet2, bet3,bet4,bet5,bet10,bet15,bet20);
+
+
+
+
+
+
+		// then asks users to pick number of games
 		Label games = new Label("How many games do you want to play?");
-		ComboBox<Integer> games_txt = new ComboBox<>();
-		games_txt.getItems().addAll(1, 2, 3, 4, 5, 10, 15, 20);
+		Button games1 = new Button("1");
+		Button games2 = new Button("2");
+		Button games3 = new Button("3");
+		Button games4 = new Button("4");
+		Button games5 = new Button("5");
+		Button games10 = new Button("10");
+		Button games15 = new Button("15");
+		Button games20 = new Button("20");
+
+		GridPane.setHalignment(games1, HPos.CENTER);
+		GridPane.setValignment(games1, VPos.CENTER);
+
+		games1.setOnAction(e->Player.set_Value(1));
+		games2.setOnAction(e->Player.set_Value(2));
+		games3.setOnAction(e->Player.set_Value(3));
+		games4.setOnAction(e->Player.set_Value(4));
+		games5.setOnAction(e->Player.set_Value(5));
+		games10.setOnAction(e->Player.set_Value(10));
+		games15.setOnAction(e->Player.set_Value(15));
+		games20.setOnAction(e->Player.set_Value(20));
+		HBox gamesBox = new HBox(20, games1, games2, games3,games4,games5,games10,games15,games20);
 
 		Button save = new Button("Next");
 		save.setOnAction(e -> window.setScene(scene3));
 		//layout2.getChildren().addAll(menu2);
-		borderPane.getChildren().addAll(menu2,save,amountBox);
+		borderPane.getChildren().addAll(menu2,spots,save,amountBox,betBox,gamesBox);
 		// need a function to save results
 
 
@@ -139,15 +182,16 @@ public class JavaFXTemplate extends Application {
 
 		// next screen displays grid and options
 		GridPane grid_screen = new GridPane();
+		grid_screen.setDisable(true);
 		grid_screen.setAlignment(Pos.CENTER);
 		grid_screen.setHgap(10);
 		grid_screen.setVgap(10);
 		grid_screen.add(spots, 0, 0);
 		//grid_screen.add(spots_txt, 1, 0);
 		grid_screen.add(bets, 0, 1);
-		grid_screen.add(bets_txt, 1, 1);
+		//grid_screen.add(bets_txt, 1, 1);
 		grid_screen.add(games, 0, 2);
-		grid_screen.add(games_txt, 1, 2);
+		//grid_screen.add(games_txt, 1, 2);
 		grid_screen.add(save, 0, 3);
 
 		// user pick numbers from grid
@@ -167,7 +211,6 @@ public class JavaFXTemplate extends Application {
 		// need function that displays for numbers that are selected
 		Button next = new Button("Next");
 		//next.setOnAction(event -> display_numbers(primaryStage));
-
 		VBox pickScreen = new VBox(10);
 		pickScreen.setAlignment(Pos.CENTER);
 		pickScreen.getChildren().addAll(spots, num, next);
@@ -180,7 +223,7 @@ public class JavaFXTemplate extends Application {
 	// function for randomizing the numbers
 	// adding up total winnings
 	// final screen displaying done
-	// pause transitions in grid
+	// pause transitions in gridu
 	// updates grids based on 4 spots choices
 	// update background with cool image
 	// start drawing grid button
