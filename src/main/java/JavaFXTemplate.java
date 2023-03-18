@@ -132,14 +132,14 @@ public class JavaFXTemplate extends Application {
 		GridPane.setHalignment(bet1, HPos.CENTER);
 		GridPane.setValignment(bet1, VPos.CENTER);
 
-		bet1.setOnAction(e->Player.set_Value(1));
-		bet2.setOnAction(e->Player.set_Value(2));
-		bet3.setOnAction(e->Player.set_Value(3));
-		bet4.setOnAction(e->Player.set_Value(4));
-		bet5.setOnAction(e->Player.set_Value(5));
-		bet10.setOnAction(e->Player.set_Value(10));
-		bet15.setOnAction(e->Player.set_Value(15));
-		bet20.setOnAction(e->Player.set_Value(20));
+		bet1.setOnAction(e->Player.set_Bet(1));
+		bet2.setOnAction(e->Player.set_Bet(2));
+		bet3.setOnAction(e->Player.set_Bet(3));
+		bet4.setOnAction(e->Player.set_Bet(4));
+		bet5.setOnAction(e->Player.set_Bet(5));
+		bet10.setOnAction(e->Player.set_Bet(10));
+		bet15.setOnAction(e->Player.set_Bet(15));
+		bet20.setOnAction(e->Player.set_Bet(20));
 		HBox betBox = new HBox(20, bet1, bet2, bet3,bet4,bet5,bet10,bet15,bet20);
 
 
@@ -161,14 +161,14 @@ public class JavaFXTemplate extends Application {
 		GridPane.setHalignment(games1, HPos.CENTER);
 		GridPane.setValignment(games1, VPos.CENTER);
 
-		games1.setOnAction(e->Player.set_Value(1));
-		games2.setOnAction(e->Player.set_Value(2));
-		games3.setOnAction(e->Player.set_Value(3));
-		games4.setOnAction(e->Player.set_Value(4));
-		games5.setOnAction(e->Player.set_Value(5));
-		games10.setOnAction(e->Player.set_Value(10));
-		games15.setOnAction(e->Player.set_Value(15));
-		games20.setOnAction(e->Player.set_Value(20));
+		games1.setOnAction(e->Player.set_Draws(1));
+		games2.setOnAction(e->Player.set_Draws(2));
+		games3.setOnAction(e->Player.set_Draws(3));
+		games4.setOnAction(e->Player.set_Draws(4));
+		games5.setOnAction(e->Player.set_Draws(5));
+		games10.setOnAction(e->Player.set_Draws(10));
+		games15.setOnAction(e->Player.set_Draws(15));
+		games20.setOnAction(e->Player.set_Draws(20));
 		HBox gamesBox = new HBox(20, games1, games2, games3,games4,games5,games10,games15,games20);
 
 		Button save = new Button("Next");
