@@ -97,12 +97,15 @@ public class Player {
     static String getSpot(){
         return Integer.toString(spot);
     }
+    //get players bet
     static String getplayBet(){
         return Integer.toString(playBet);
     }
+    //gets the drawing result
     static String getDraw(int index){
         return Integer.toString(drawing[index]);
     }
+
 
 
 }

@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -38,7 +39,7 @@ public class JavaFXTemplate extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("Welcome to Win or Go Home");
-
+		DropShadow shadow = new DropShadow();
 		window = primaryStage;
 		//scene1
 		VBox layout = new VBox(10);
@@ -137,10 +138,7 @@ public class JavaFXTemplate extends Application {
 		rulesMenu2.getItems().add(ruleConfirm2);
 
 		exit2.setOnAction(e -> window.close());
-		dark.setOnAction((ActionEvent)->{
-			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
-			//menuBar2.setStyle("-fx-background-image: url("+image+") ");
-		});
+
 		rulesMenu2.setOnAction((ActionEvent)->{
 			currentScene = scene2;
 			window.setScene(scene1);
@@ -151,7 +149,10 @@ public class JavaFXTemplate extends Application {
 		});
 		MenuBar menuBar2 = new MenuBar();
 		menuBar2.getMenus().addAll(rulesMenu2, winOddsMenu2,newlook, exit2);
-
+		dark.setOnAction((ActionEvent)->{
+			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
+			menuBar2.setStyle("-fx-background-color: DarkGrey");
+		});
 		HBox menu2 = new HBox(20);
 		menu2.getChildren().add(menuBar2);
 
@@ -253,7 +254,9 @@ public class JavaFXTemplate extends Application {
 		games10.setDisable(true);
 		games15.setDisable(true);
 		games20.setDisable(true);
+
 		amount1.setOnAction((ActionEvent) -> {
+			amount1.setEffect(shadow);
 			bet1.setDisable(false);
 			bet2.setDisable(false);
 			bet3.setDisable(false);
@@ -265,6 +268,7 @@ public class JavaFXTemplate extends Application {
 
 		});
 		amount4.setOnAction((ActionEvent) -> {
+			amount4.setEffect(shadow);
 			bet1.setDisable(false);
 			bet2.setDisable(false);
 			bet3.setDisable(false);
@@ -275,6 +279,7 @@ public class JavaFXTemplate extends Application {
 			bet20.setDisable(false);
 		});
 		amount8.setOnAction((ActionEvent) -> {
+			amount8.setEffect(shadow);
 			bet1.setDisable(false);
 			bet2.setDisable(false);
 			bet3.setDisable(false);
@@ -285,6 +290,7 @@ public class JavaFXTemplate extends Application {
 			bet20.setDisable(false);
 		});
 		amount10.setOnAction((ActionEvent) -> {
+			amount10.setEffect(shadow);
 			bet1.setDisable(false);
 			bet2.setDisable(false);
 			bet3.setDisable(false);
@@ -295,6 +301,7 @@ public class JavaFXTemplate extends Application {
 			bet20.setDisable(false);
 		});
 		bet1.setOnAction((ActionEvent) ->{
+			bet1.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -305,6 +312,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet2.setOnAction((ActionEvent) ->{
+			bet2.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -315,6 +323,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet3.setOnAction((ActionEvent) ->{
+			bet3.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -325,6 +334,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet4.setOnAction((ActionEvent) ->{
+			bet4.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -335,6 +345,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet5.setOnAction((ActionEvent) ->{
+			bet5.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -345,6 +356,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet10.setOnAction((ActionEvent) ->{
+			bet10.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -355,6 +367,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet15.setOnAction((ActionEvent) ->{
+			bet15.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -365,6 +378,7 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		bet20.setOnAction((ActionEvent) ->{
+			bet20.setEffect(shadow);
 			games1.setDisable(false);
 			games2.setDisable(false);
 			games3.setDisable(false);
@@ -375,28 +389,36 @@ public class JavaFXTemplate extends Application {
 			games20.setDisable(false);
 		});
 		games1.setOnAction((ActionEvent)->{
+			games1.setEffect(shadow);
 			button.setDisable(false);
 		});
 		games2.setOnAction((ActionEvent)->{
+			games2.setEffect(shadow);
 			button.setDisable(false);
 		});
 		games3.setOnAction((ActionEvent)->{
 			button.setDisable(false);
+			games3.setEffect(shadow);
 		});
 		games4.setOnAction((ActionEvent)->{
 			button.setDisable(false);
+			games4.setEffect(shadow);
 		});
 		games5.setOnAction((ActionEvent)->{
 			button.setDisable(false);
+			games5.setEffect(shadow);
 		});
 		games10.setOnAction((ActionEvent)->{
 			button.setDisable(false);
+			games10.setEffect(shadow);
 		});
 		games15.setOnAction((ActionEvent)->{
 			button.setDisable(false);
+			games15.setEffect(shadow);
 		});
 		games20.setOnAction((ActionEvent)->{
 			button.setDisable(false);
+			games20.setEffect(shadow);
 		});
 		//layout2.getChildren().addAll(menu2);
 		borderPane.setBackground(background2);
@@ -407,6 +429,9 @@ public class JavaFXTemplate extends Application {
 		VBox border2 = new VBox(10);
 		scene3 = new Scene(border2, 800, 640);
 
+
+		HBox menu3 = new HBox(20);
+		menu3.getChildren().add(menuBar2);
 		// user pick numbers from grid
 		Label pick_num = new Label("Pick spots:");
 		pick_num.setFont(Font.font("Verdana", 10));
@@ -428,7 +453,7 @@ public class JavaFXTemplate extends Application {
 		// need function that displays for numbers that are selected
 		Button next = new Button("Next");
 
-		border2.getChildren().addAll(pick_num, num, next);
+		border2.getChildren().addAll(menu3,pick_num, num,next);
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
