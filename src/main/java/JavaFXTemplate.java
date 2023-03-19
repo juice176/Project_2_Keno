@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 
 public class JavaFXTemplate extends Application {
-	private final ArrayList<Integer> selectNumbers = new ArrayList<>();
+	private static ArrayList<Button> selectNumbers = new ArrayList<Button>();
 	private int i = 0,j = 0, k = 0;
 	Stage window;
 	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
@@ -48,16 +48,10 @@ public class JavaFXTemplate extends Application {
 
 
 		//Menu
-		//Menu rulesMenu = new Menu("Rules");
-		//Menu winOddsMenu = new Menu("Odds");
 		Menu exit = new Menu("Exit");
 		MenuItem exitconfirm = new MenuItem("Exit Confirm");
-		//MenuItem ruleConfirm = new MenuItem("Rules Confirm");
-		//MenuItem winOddsConfirm = new MenuItem("Odds Confirm");
 
 		exit.getItems().add(exitconfirm);
-		//winOddsMenu.getItems().add(winOddsConfirm);
-		//rulesMenu.getItems().add(ruleConfirm);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(exit);
 
@@ -439,26 +433,49 @@ public class JavaFXTemplate extends Application {
 			Button num_select = new Button(String.valueOf(i));
 			num_select.setPrefSize(50, 50);
 			num_select.setOnAction((ActionEvent) -> {
-				Player.storecardSelection(Integer.parseInt(num_select.getText()), num_select.isPressed());
+				Player.storecardSelection(num_select.getText(), num_select.isPressed());
 			});
-
+			selectNumbers.add(num_select);
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
 		}
-
-
+		Text selectedChoice = new Text();
+		Text numSelected = new Text();
 		// need function that displays for numbers that are selected
-		Button next = new Button("Next");
+		Button next = new Button("Start Drawing");
+
+		next.setOnAction((ActionEvent) -> {
+			String userInput1 = amount1.getText();
+			String userInput2 = amount4.getText();
+			String userInput3 = amount8.getText();
+			String userInput4 = amount10.getText();
+
+			if(Player.spotsSelect(userInput1)==true || Player.spotsSelect(userInput2)==true || Player.spotsSelect(userInput3)==true || Player.spotsSelect(userInput4)==true
+					&& Player.getNoOfDraws() > 0 ) {
+				selectedChoice.setText(Player.getSelectedList());
+				numSelected.setText(String.valueOf(Player.getTotalSelectedSpots()));
+				Player.nextDraw();
+
+
+
+
+				Player.draw();
+				//also check if the random input is pressed
+			}
+
+
+
+		});
 		next.setOnAction(e -> window.setScene(scene4));
 		border2.getChildren().addAll(menu3,pick_num, num,next);
 		//scene 4
-		//scene 3 with gridpane
+		//scene 3 with grid pane
 		VBox border4 = new VBox(10);
 		scene4 = new Scene(border4, 800, 640);
 		Label draw = new Label("Draw Results:");
 		Label winning = new Label("Total Winnings:");
 		HBox resultsbox = new HBox(10);
 		resultsbox.getChildren().addAll(draw,winning);
-		border4.getChildren().add(resultsbox);
+		border4.getChildren().addAll(resultsbox,selectedChoice,numSelected);
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
