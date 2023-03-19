@@ -8,10 +8,28 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MyTest {
-
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	public void calculatorInitialValueZero() {
+		Player calculator = new Player();
+		assertEquals(0, calculator.getTotalWinning());
 	}
+	@Test
+	public void calculatorInitialValueZero1(){
+		Player calc = new Player();
+		assertEquals(0, Player.getplayBet());
+	}
+	@Test
+	public void calculatorInitialSpots(){
+		Player.set_Value(1);
+		assertEquals(1,Player.getSpot());
+	}
+	@Test
+	public void calculatorInitialcheckspots(){
+		Player.set_Value(1);
+		int jello = Player.getSpot();
+		int hello = Player.game.size();
+		assertEquals(1,Player.getSpot());
+	}
+
 
 }

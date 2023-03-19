@@ -1,16 +1,16 @@
-import javafx.scene.control.Button;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
-    public static ArrayList<String> game; // players user input
-    public static int playBet;
-    public static int spot;
-    public static int drawings;
+    static ArrayList<Integer> game = new ArrayList<Integer>(); // players user input
 
-    public static int counter;
-    public static int totalWinnings;
+    private static ArrayList<String> list = new ArrayList<String>();//matched outcome
+    public static int playBet = 1;
+    public static int spot = 1;
+    public static int drawings = 20;
+
+    public static int counter = 0;
+    public static int totalWinnings = 0;
     private static int[] drawing = new int[20];
     //boolean gameRun = true;
 
@@ -18,14 +18,14 @@ public class Player {
     // set player
     Player(){
         super();
-        this.game = new ArrayList<String>();
+        this.game = new ArrayList<Integer>();
         this.playBet = 0;
         this.spot = 0;
         this.drawings = 20;
         this.totalWinnings = 0;
     }
     //setting the card by userinput
-    static void storecardSelection(String value, boolean pressButton){
+    static void storecardSelection(Integer value, boolean pressButton){
         if(pressButton == true){
             game.add(value);// store the numbers picked by the user
         }
@@ -36,7 +36,7 @@ public class Player {
     static String getSelectedList() {
         StringBuilder listString = new StringBuilder();
 
-        for (String s : game)
+        for (Integer s : game)
             listString.append(s + ", ");
 
         return listString.toString();
@@ -52,10 +52,10 @@ public class Player {
 //        return true;
 //    }
 
-    static boolean spotsSelect(String input){
+    static boolean spotsSelect(Integer input){
         Integer buttons = game.size();
         //
-        if((input == "1" && buttons == 1)|| (input == "4" && buttons == 4)||(input == "8" && buttons == 8)||(input == "10" && buttons == 10) ){
+        if((input == 1 && buttons == 1)||(input == 4 && buttons == 4 )|| (input == 8 && buttons == 8 )|| (input == 10 && buttons == 10)){
             return true;
         }
         else{
@@ -135,18 +135,51 @@ public class Player {
     static void set_Draws(int value){
         drawings = value;
     }
-    static String getTotalWinning(){
-        return Integer.toString(totalWinnings);
+    static Integer getTotalWinning(){
+        return totalWinnings;
     }
-    static String getSpot(){
-        return Integer.toString(spot);
+    static Integer getSpot(){
+        return spot;
     }
-    static String getplayBet(){
-        return Integer.toString(playBet);
+    static Integer getplayBet(){
+        return playBet;
     }
-    static String getDraw(int index){
-        return Integer.toString(drawing[index]);
+    static Integer getDraws(){
+        return drawings;
+    }
+    static int getDraw(int index){
+        return drawing[index];
     }
 
+    static String getMatchedSize() {
+        return Integer.toString(list.size());
+    }
+    static String getMatchedList() {
 
+        if (list.size() == 0) {
+            return "NILL";
+        }
+        StringBuilder listString = new StringBuilder();
+
+        for (String s : list)
+            listString.append(s + ", ");
+
+        return listString.toString();
+    }
+    static void resetDraw() {
+        list.clear();
+    }
+
+    static String getAmountResult() {
+        String out;
+
+        for (int i = 0; i < 20; i++) {
+            list.add(i, Integer.toString(drawing[i]));
+        }
+        list.retainAll(game);
+
+        out = Odds.gameChart(game.size(), list.size(), spot);
+        spot += Integer.parseInt(out);
+        return out;
+    }
 }

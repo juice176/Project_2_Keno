@@ -1,3 +1,5 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,12 +13,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import javafx.event.EventHandler;
 import java.util.ArrayList;
 
 
 public class JavaFXTemplate extends Application {
-	private static ArrayList<Button> selectNumbers = new ArrayList<Button>();
+	private static ArrayList<ToggleButton> selectNumbers = new ArrayList<ToggleButton>();
+	private final int TOTAL_DRAWINGS = 20;
 	private int i = 0,j = 0, k = 0;
 	Stage window;
 	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
@@ -417,7 +422,7 @@ public class JavaFXTemplate extends Application {
 		VBox border2 = new VBox(10);
 		scene3 = new Scene(border2, 800, 640);
 
-
+		Button next = new Button("Start Drawing");
 		HBox menu3 = new HBox(20);
 		menu3.getChildren().add(menuBar2);
 		// user pick numbers from grid
@@ -430,43 +435,129 @@ public class JavaFXTemplate extends Application {
 
 		// need function that checks for numbers that ar ebeing selected
 		for (int i = 1; i <= 80; i++) {
-			Button num_select = new Button(String.valueOf(i));
+			ToggleButton num_select = new ToggleButton(String.valueOf(i));
 			num_select.setPrefSize(50, 50);
 			num_select.setOnAction((ActionEvent) -> {
-				Player.storecardSelection(num_select.getText(), num_select.isPressed());
+				Player.storecardSelection(Integer.valueOf(num_select.getText()), num_select.isPressed());
 			});
 			selectNumbers.add(num_select);
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
 		}
 		Text selectedChoice = new Text();
 		Text numSelected = new Text();
+		Text help = new Text();
+		Label drawNotice = new Label("Draw Result:");
+		Label drawOutput = new Label("NILL");
+		Label amountWonNotice = new Label("Amount Won:");
+		Label amountWonOutput = new Label("NILL");
+		Label selectedChoiceText = new Label("Choices Provided:");
+		//Label selectedChoice = new Label("NILL");
+		Label selectedBetText = new Label("Bet");
+		Label selectedBet = new Label("NILL");
+		Label totalBetText = new Label("Total Bet");
+		Label totalBet = new Label("NILL");
+		Label noOfMatchedText = new Label("No. of Matched Items");
+		Label itemsMatchedText = new Label("Matched Items");
+		Label wonText = new Label("Won");
+		Label drawNoText = new Label("Draw");
+		Label draw1 = new Label("1");
+		Label draw2 = new Label("2");
+		Label draw3 = new Label("3");
+		Label draw4 = new Label("4");
+		Label oneNoOfMatched = new Label("NILL");
+		Label oneItemsMatched = new Label("NILL");
+		Label oneWon = new Label("NILL");
+		Label twoNoOfMatched = new Label("NILL");
+		Label twoItemsMatched = new Label("NILL");
+		Label twoWon = new Label("NILL");
+		Label threeNoOfMatched = new Label("NILL");
+		Label threeItemsMatched = new Label("NILL");
+		Label threeWon = new Label("NILL");
+		Label fourNoOfMatched = new Label("NILL");
+		Label fourItemsMatched = new Label("NILL");
+		Label fourWon = new Label("NILL");
 		// need function that displays for numbers that are selected
-		Button next = new Button("Start Drawing");
 
 		next.setOnAction((ActionEvent) -> {
-			String userInput1 = amount1.getText();
-			String userInput2 = amount4.getText();
-			String userInput3 = amount8.getText();
-			String userInput4 = amount10.getText();
-
-			if(Player.spotsSelect(userInput1)==true || Player.spotsSelect(userInput2)==true || Player.spotsSelect(userInput3)==true || Player.spotsSelect(userInput4)==true
-					&& Player.getNoOfDraws() > 0 ) {
-				selectedChoice.setText(Player.getSelectedList());
-				numSelected.setText(String.valueOf(Player.getTotalSelectedSpots()));
+			selectedChoice.setText(String.valueOf(Player.spotsSelect(Player.getSpot())));
+			if ((Player.spotsSelect(Player.getSpot()))) {
 				Player.nextDraw();
 
+				numSelected.setText(String.valueOf(Player.getTotalSelectedSpots()));
+				help.setText("Drawing!");
 
 
 
 				Player.draw();
-				//also check if the random input is pressed
+//				Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+//
+//					@Override
+//					public void handle(ActionEvent event) {
+//						drawOutput.setText(String.valueOf(Player.getDraw(k)));
+//
+//						// Looping until all draws are complete
+//						Player.decrementNoOfDraws();
+//						k++;
+//
+//						// A Draw completes i.e 20 sub draws
+//						if (k == 20) {
+//							String tempAmount;
+//
+//							help.setText("Continue to Next Draw");
+//							String nstr = String.valueOf(Player.getDraws());
+//							if (Integer.parseInt(nstr) == Player.getCurrentDraw()) {
+//								help.setText("Game Over");
+//								next.setDisable(true);
+//
+//							} else {
+//								next.setDisable(false);
+//							}
+//
+//							// Show results
+//							tempAmount = Player.getAmountResult();
+//							amountWonOutput.setText("$" + Player.getTotalWinning());
+//
+//							if (Player.getCurrentDraw() == 1) {
+//								oneNoOfMatched.setText(Player.getMatchedSize());
+//								oneItemsMatched.setText(Player.getMatchedList());
+//								oneWon.setText("$" + tempAmount);
+//							} else if (Player.getCurrentDraw() == 2) {
+//								twoNoOfMatched.setText(Player.getMatchedSize());
+//								twoItemsMatched.setText(Player.getMatchedList());
+//								twoWon.setText("$" + tempAmount);
+//							} else if (Player.getCurrentDraw() == 3) {
+//								threeNoOfMatched.setText(Player.getMatchedSize());
+//								threeItemsMatched.setText(Player.getMatchedList());
+//								threeWon.setText("$" + tempAmount);
+//							} else if (Player.getCurrentDraw() == 4) {
+//								fourNoOfMatched.setText(Player.getMatchedSize());
+//								fourItemsMatched.setText(Player.getMatchedList());
+//								fourWon.setText("$" + tempAmount);
+//							} else {
+//								throw new RuntimeException("Illegal Draw");
+//							}
+//
+//							// Reset
+//							Player.resetDraw();
+//						}
+//					}
+//				}));
+//
+//				// Reset printing draws position to zero
+//				k = 0;
+//
+//				// 20 Draws
+//				timeline.setCycleCount(TOTAL_DRAWINGS - k);
+//				timeline.play();
+
 			}
-
-
-
+			else {
+				// do Warn User
+				help.setText("Check Your Spots");
+			}
 		});
-		next.setOnAction(e -> window.setScene(scene4));
-		border2.getChildren().addAll(menu3,pick_num, num,next);
+		//next.setOnAction(e -> window.setScene(scene4));
+		border2.getChildren().addAll(menu3,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput);
 		//scene 4
 		//scene 3 with grid pane
 		VBox border4 = new VBox(10);
@@ -475,7 +566,7 @@ public class JavaFXTemplate extends Application {
 		Label winning = new Label("Total Winnings:");
 		HBox resultsbox = new HBox(10);
 		resultsbox.getChildren().addAll(draw,winning);
-		border4.getChildren().addAll(resultsbox,selectedChoice,numSelected);
+		//border4.getChildren().addAll(resultsbox,selectedChoice,numSelected);
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
