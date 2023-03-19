@@ -30,6 +30,17 @@ public class Player {
             game.remove(value); // remove the numbers not picked by the user
         }
     }
+
+    // updates game arraylist when spot is selected
+    static boolean addArray(Button num_select){
+        if(num_select.size() == spot) {
+            System.out.println("Reached Max spots");
+            return false;
+        }
+        num_select.add(game);
+        return true;
+    }
+
     static boolean spotsSelect(String input, Integer buttons){
         buttons = game.size();
         //|| (input == "4" && buttons == 4)||(input == "8" && buttons == 8)||(input == "10" && buttons == 10)
@@ -40,7 +51,6 @@ public class Player {
             return false;
         }
     }
-
 
     static void reset(){
         game.clear();
@@ -97,15 +107,12 @@ public class Player {
     static String getSpot(){
         return Integer.toString(spot);
     }
-    //get players bet
     static String getplayBet(){
         return Integer.toString(playBet);
     }
-    //gets the drawing result
     static String getDraw(int index){
         return Integer.toString(drawing[index]);
     }
-
 
 
 }
