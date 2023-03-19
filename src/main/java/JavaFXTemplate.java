@@ -444,6 +444,8 @@ public class JavaFXTemplate extends Application {
 
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
 		}
+
+
 		// need function that displays for numbers that are selected
 		Button next = new Button("Next");
 		next.setOnAction(e -> window.setScene(scene4));
