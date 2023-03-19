@@ -1,28 +1,22 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 
 public class JavaFXTemplate extends Application {
-	private ArrayList<Integer> selectNumbers = new ArrayList<>();
+	private final ArrayList<Integer> selectNumbers = new ArrayList<>();
 	private int i = 0,j = 0, k = 0;
 	Stage window;
 	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
@@ -452,8 +446,17 @@ public class JavaFXTemplate extends Application {
 		}
 		// need function that displays for numbers that are selected
 		Button next = new Button("Next");
-
+		next.setOnAction(e -> window.setScene(scene4));
 		border2.getChildren().addAll(menu3,pick_num, num,next);
+		//scene 4
+		//scene 3 with gridpane
+		VBox border4 = new VBox(10);
+		scene4 = new Scene(border4, 800, 640);
+		Label draw = new Label("Draw Results:");
+		Label winning = new Label("Total Winnings:");
+		HBox resultsbox = new HBox(10);
+		resultsbox.getChildren().addAll(draw,winning);
+		border4.getChildren().add(resultsbox);
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
@@ -468,7 +471,7 @@ public class JavaFXTemplate extends Application {
 	// pause transitions in gridu
 	// updates grids based on 4 spots choices
 	// update background with cool image
-	// start drawing grid button
+	// start drawing grid button // done
 	// next screen will start drawing then display numbers and the total winnings
 
 
