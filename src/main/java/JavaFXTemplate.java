@@ -2,18 +2,20 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+
 import java.util.ArrayList;
 
 
@@ -38,21 +40,29 @@ public class JavaFXTemplate extends Application {
 		window = primaryStage;
 		//scene1
 		VBox layout = new VBox(10);
-		scene1 = new Scene(layout, 800, 640);
+		Scene scene1 = new Scene(layout, 800, 640);
+		BackgroundFill background_fill = new BackgroundFill(Color.DARKSLATEBLUE,
+				CornerRadii.EMPTY, Insets.EMPTY);
+
+		// create Background
+		Background background = new Background(background_fill);
+
+		// set background
+
 
 		//Menu
-		Menu rulesMenu = new Menu("Rules");
-		Menu winOddsMenu = new Menu("Odds");
+		//Menu rulesMenu = new Menu("Rules");
+		//Menu winOddsMenu = new Menu("Odds");
 		Menu exit = new Menu("Exit");
 		MenuItem exitconfirm = new MenuItem("Exit Confirm");
-		MenuItem ruleConfirm = new MenuItem("Rules Confirm");
-		MenuItem winOddsConfirm = new MenuItem("Odds Confirm");
+		//MenuItem ruleConfirm = new MenuItem("Rules Confirm");
+		//MenuItem winOddsConfirm = new MenuItem("Odds Confirm");
 
 		exit.getItems().add(exitconfirm);
-		winOddsMenu.getItems().add(winOddsConfirm);
-		rulesMenu.getItems().add(ruleConfirm);
+		//winOddsMenu.getItems().add(winOddsConfirm);
+		//rulesMenu.getItems().add(ruleConfirm);
 		MenuBar menuBar = new MenuBar();
-		menuBar.getMenus().addAll(rulesMenu, winOddsMenu, exit);
+		menuBar.getMenus().addAll(exit);
 
 		HBox menu = new HBox(20);
 		menu.getChildren().add(menuBar);
@@ -63,15 +73,51 @@ public class JavaFXTemplate extends Application {
 
 		Label welcomeText = new Label("Welcome to Keno");
 		welcomeText.setAlignment(Pos.BASELINE_RIGHT);
-		welcomeText.setStyle("-fx-font: 40px \"Serif\";");
+		welcomeText.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
+
+		Text Odds = new Text();
+		Odds.setText("Keno Odds of Winning\n" +
+				"\n" +
+				"Game Type            Odds\n" +
+				"10 Spot Game        1 in 9.05\n" +
+				"8 Spot Game          1 in 9.77\n" +
+				"4 Spot Game          1 in 3.86\n" +
+				"1 Spot Game          1 in 4.00\n" +
+				"\n" +
+				"Approximate overall odds to win a prize range from 1 in 3.86 to 9.77.\n" +
+				"Approximate odds to win the top prize on the 10 Spot game are 1 in 8.91 million.");
+		Odds.setFont(Font.font("Verdana", 15));
+		Odds.setFill(Color.LIGHTBLUE);
+		Text rules = new Text();
+		rules.setText("\n" +
+				"1. Select how many numbers (spots) you want to play and your numbers\n" +
+				"\n" +
+				"Select from one to ten numbers (spots) to play, and then select your numbers from 1-80 that correspond with how many numbers (spots) you want to \nplay. You can select the numbers manually or choose random for the Lottery computer to randomly select your numbers. \n" +
+				"\n" +
+				"2. Select wager amount\n" +
+				"\n" +
+				"Select how much you want to wager on each drawing from $1 to $20.\n" +
+				"\n" +
+				"3. Select number of drawings\n" +
+				"\n" +
+				"To play the same numbers for multiple drawings, mark the number of drawings you want. \nYou can select up to 20 consecutive drawings with the same numbers.");
+		rules.setFont(Font.font("Verdana", 10));
+		rules.setFill(Color.LIGHTBLUE);
+
 
 		layout.setStyle("-fx-padding:10px;");
-		layout.getChildren().addAll(menu, welcomeText, button1);
+		layout.setBackground(background);
+		layout.getChildren().addAll(menu, welcomeText,Odds,rules, button1);
 		//scene2
 		//BorderPane borderPane = new BorderPane();
 		//GridPane borderPane = new GridPane();
 		VBox borderPane = new VBox(10);
 		scene2 = new Scene(borderPane, 800, 640);
+		BackgroundFill background_fill2 = new BackgroundFill(Color.LIGHTPINK,
+				CornerRadii.EMPTY, Insets.EMPTY);
+
+		// create Background
+		Background background2 = new Background(background_fill2);
 		//scene2 = new Scene(borderPane,800,600);
 		//borderPane.setStyle("-fx-padding:10px;");
 		Menu rulesMenu2 = new Menu("Rules");
@@ -83,22 +129,28 @@ public class JavaFXTemplate extends Application {
 		MenuItem winOddsConfirm2 = new MenuItem("Odds Confirm");
 
 		exit2.getItems().add(exitconfirm2);
+
 		winOddsMenu2.getItems().add(winOddsConfirm2);
 		rulesMenu2.getItems().add(ruleConfirm2);
-
+		exit2.setOnAction(e -> window.close());
+		rulesMenu2.setOnAction((ActionEvent)->{
+			currentScene = scene2;
+			window.setScene(scene1);
+		});
+		winOddsMenu2.setOnAction((ActionEvent)->{
+			currentScene = scene2;
+			window.setScene(scene1);
+		});
 		MenuBar menuBar2 = new MenuBar();
 		menuBar2.getMenus().addAll(rulesMenu2, winOddsMenu2, exit2);
 
 		HBox menu2 = new HBox(20);
 		menu2.getChildren().add(menuBar2);
-//		menu2.setAlignment(Pos.TOP_LEFT);
 
 		// updates:
 		// asks user to pick spots
 		Label spots = new Label("How many spots?");
 
-//		ComboBox<Integer> spots_txt = new ComboBox<>();
-//		spots_txt.getItems().addAll(1, 4, 8, 10);
 		//version 2
 		Button amount1 = new Button("1");
 		Button amount4 = new Button("4");
@@ -108,8 +160,6 @@ public class JavaFXTemplate extends Application {
 //		GridPane screen_layout = new GridPane();
 
 		borderPane.setAlignment(Pos.TOP_LEFT);
-		GridPane.setHalignment(amount1, HPos.CENTER);
-		GridPane.setValignment(amount1, VPos.CENTER);
 
 		amount1.setOnAction(e -> Player.set_Value(1));
 		amount4.setOnAction(e -> Player.set_Value(4));
@@ -129,8 +179,6 @@ public class JavaFXTemplate extends Application {
 		Button bet15 = new Button("$15");
 		Button bet20 = new Button("$20");
 
-		GridPane.setHalignment(bet1, HPos.CENTER);
-		GridPane.setValignment(bet1, VPos.CENTER);
 
 		bet1.setOnAction(e->Player.set_Bet(1));
 		bet2.setOnAction(e->Player.set_Bet(2));
@@ -158,8 +206,6 @@ public class JavaFXTemplate extends Application {
 		Button games15 = new Button("15");
 		Button games20 = new Button("20");
 
-		GridPane.setHalignment(games1, HPos.CENTER);
-		GridPane.setValignment(games1, VPos.CENTER);
 
 		games1.setOnAction(e->Player.set_Draws(1));
 		games2.setOnAction(e->Player.set_Draws(2));
@@ -171,12 +217,29 @@ public class JavaFXTemplate extends Application {
 		games20.setOnAction(e->Player.set_Draws(20));
 		HBox gamesBox = new HBox(20, games1, games2, games3,games4,games5,games10,games15,games20);
 
-		Button save = new Button("Next");
-		save.setOnAction(e -> window.setScene(scene3));
-		//layout2.getChildren().addAll(menu2);
-		borderPane.getChildren().addAll(menu2,spots,save,amountBox,betBox,gamesBox);
-		// need a function to save results
+		Button button = new Button("NEXT");
+		button.setOnAction(e -> window.setScene(scene3));
 
+		button.setDisable(true);
+		amount1.setOnAction((ActionEvent) -> {
+			button.setDisable(false);
+		});
+		amount4.setOnAction((ActionEvent) -> {
+			button.setDisable(false);
+		});
+		amount8.setOnAction((ActionEvent) -> {
+			button.setDisable(false);
+		});
+		amount10.setOnAction((ActionEvent) -> {
+			button.setDisable(false);
+		});
+		//layout2.getChildren().addAll(menu2);
+		borderPane.setBackground(background2);
+		borderPane.getChildren().addAll(menu2,amountBox,betBox,gamesBox);
+		borderPane.getChildren().addAll(button);
+		// need a function to save results
+		VBox border2 = new VBox(10);
+		scene3 = new Scene(border2, 800, 640);
 
 		//save.setOnAction(event -> Player.storecardSelection());
 
@@ -192,7 +255,7 @@ public class JavaFXTemplate extends Application {
 		//grid_screen.add(bets_txt, 1, 1);
 		grid_screen.add(games, 0, 2);
 		//grid_screen.add(games_txt, 1, 2);
-		grid_screen.add(save, 0, 3);
+		grid_screen.add(button, 0, 3);
 
 		// user pick numbers from grid
 		Label pick_num = new Label("Pick spots:");

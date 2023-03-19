@@ -1,12 +1,12 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
+
 public class Player {
-    public static ArrayList<Integer> game;
+    public static ArrayList<Integer> game; // players user input
     public static int playBet;
     public static int spot;
+    public static int drawings;
     public static int totalWinnings;
+    private static int[] drawing = new int[20];
     //boolean gameRun = true;
 
 
@@ -16,10 +16,11 @@ public class Player {
         this.game = new ArrayList<Integer>();
         this.playBet = 0;
         this.spot = 0;
+        this.drawings = 0;
         this.totalWinnings = 0;
     }
     //setting the card by userinput
-    void storecardSelection(int value, boolean pressButton){
+    static void storecardSelection(int value, boolean pressButton){
         if(pressButton){
             game.add(value);// store the numbers picked by the user
         }
@@ -27,20 +28,18 @@ public class Player {
             game.remove(value); // remove the numbers not picked by the user
         }
     }
-    static boolean spotsSelect(String input){
-        int buttons = game.size();
-        if((input == "1" && buttons == 1) || (input == "4" && buttons == 4)||(input == "8" && buttons == 8)||(input == "10" && buttons == 10)){
+    static boolean spotsSelect(String input, Integer buttons){
+        buttons = game.size();
+        //|| (input == "4" && buttons == 4)||(input == "8" && buttons == 8)||(input == "10" && buttons == 10)
+        if(input == "1" && buttons == 1 ){
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
-    static String getTotalWinning(){
-        return Integer.toString(totalWinnings);
-    }
-    static String getplayBet(){
-        return Integer.toString(playBet);
-    }
+
     static void reset(){
         game.clear();
         playBet = 0;
@@ -50,17 +49,30 @@ public class Player {
 
     private int value;
 
-    public Card(int value) {
-        this.value = value;
+//set number of spots
+    public static void set_Value(int value) {
+        spot = value;
+    }
+    //set number of bets
+    static void set_Bet(int value){
+        playBet = value;
+    }
+    //set number of draws
+    static void set_Draws(int value){
+        drawings = value;
+    }
+    static String getTotalWinning(){
+        return Integer.toString(totalWinnings);
+    }
+    static String getSpot(){
+        return Integer.toString(spot);
+    }
+    static String getplayBet(){
+        return Integer.toString(playBet);
+    }
+    static String getDraw(int index){
+        return Integer.toString(drawing[index]);
     }
 
-
-    public void set_Value(int value) {
-        this.value = value;
-    }
-
-    public int get_value( )  {
-        return this.value;
-    }
 
 }
