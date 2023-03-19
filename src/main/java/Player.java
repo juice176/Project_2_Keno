@@ -5,6 +5,8 @@ public class Player {
     public static int playBet;
     public static int spot;
     public static int drawings;
+
+    public static int counter;
     public static int totalWinnings;
     private static int[] drawing = new int[20];
     //boolean gameRun = true;
@@ -16,7 +18,7 @@ public class Player {
         this.game = new ArrayList<Integer>();
         this.playBet = 0;
         this.spot = 0;
-        this.drawings = 0;
+        this.drawings = 20;
         this.totalWinnings = 0;
     }
     //setting the card by userinput
@@ -48,6 +50,34 @@ public class Player {
     }
 
     private int value;
+    static int getTotalSelectedSpots() {
+        return game.size();
+    }
+
+    // 20 sub-draw = 1 draw, 40 sub-draw = 2 draw, ...
+    static void setNoOfDraws(int value) {
+        drawings = value;
+    }
+
+    // Decrement sub-draws by 1, 1 drawing completes
+    static void decrementNoOfDraws() {
+        drawings--;
+    }
+
+    // total sub-draws remaining
+    static int getNoOfDraws() {
+        return drawings;
+    }
+
+    // Returns which Draw is executing
+    static int getCurrentDraw() {
+        return counter;
+    }
+
+    // increments drawCounter when 1 draw completes a.k.a 20 sub-draws
+    static void nextDraw() {
+        counter++;
+    }
 
 //set number of spots
     public static void set_Value(int value) {

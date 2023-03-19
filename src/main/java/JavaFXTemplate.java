@@ -15,12 +15,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 
 public class JavaFXTemplate extends Application {
 	private ArrayList<Integer> selectNumbers = new ArrayList<>();
+	private int i = 0,j = 0, k = 0;
 	Stage window;
 	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
 	//public static TextArea t2;
@@ -109,8 +111,6 @@ public class JavaFXTemplate extends Application {
 		layout.setBackground(background);
 		layout.getChildren().addAll(menu, welcomeText,Odds,rules, button1);
 		//scene2
-		//BorderPane borderPane = new BorderPane();
-		//GridPane borderPane = new GridPane();
 		VBox borderPane = new VBox(10);
 		scene2 = new Scene(borderPane, 800, 640);
 		BackgroundFill background_fill2 = new BackgroundFill(Color.LIGHTPINK,
@@ -118,21 +118,29 @@ public class JavaFXTemplate extends Application {
 
 		// create Background
 		Background background2 = new Background(background_fill2);
-		//scene2 = new Scene(borderPane,800,600);
-		//borderPane.setStyle("-fx-padding:10px;");
+
 		Menu rulesMenu2 = new Menu("Rules");
 		Menu winOddsMenu2 = new Menu("Odds");
 		Menu exit2 = new Menu("Exit");
+		Menu newlook = new Menu("NewLook");
 
 		MenuItem exitconfirm2 = new MenuItem("Exit Confirm");
 		MenuItem ruleConfirm2 = new MenuItem("Rules Confirm");
 		MenuItem winOddsConfirm2 = new MenuItem("Odds Confirm");
+		MenuItem dark = new MenuItem("Dark Mode");
+		MenuItem light = new MenuItem("Light Mode");
+
 
 		exit2.getItems().add(exitconfirm2);
-
+		newlook.getItems().addAll(dark,light);
 		winOddsMenu2.getItems().add(winOddsConfirm2);
 		rulesMenu2.getItems().add(ruleConfirm2);
+
 		exit2.setOnAction(e -> window.close());
+		dark.setOnAction((ActionEvent)->{
+			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
+			//menuBar2.setStyle("-fx-background-image: url("+image+") ");
+		});
 		rulesMenu2.setOnAction((ActionEvent)->{
 			currentScene = scene2;
 			window.setScene(scene1);
@@ -142,15 +150,14 @@ public class JavaFXTemplate extends Application {
 			window.setScene(scene1);
 		});
 		MenuBar menuBar2 = new MenuBar();
-		menuBar2.getMenus().addAll(rulesMenu2, winOddsMenu2, exit2);
+		menuBar2.getMenus().addAll(rulesMenu2, winOddsMenu2,newlook, exit2);
 
 		HBox menu2 = new HBox(20);
 		menu2.getChildren().add(menuBar2);
 
+
 		// updates:
 		// asks user to pick spots
-		Label spots = new Label("How many spots?");
-
 		//version 2
 		Button amount1 = new Button("1");
 		Button amount4 = new Button("4");
@@ -166,10 +173,16 @@ public class JavaFXTemplate extends Application {
 		amount8.setOnAction(e -> Player.set_Value(8));
 		amount10.setOnAction(e -> Player.set_Value(10));
 
-		HBox amountBox = new HBox(20, amount1, amount4, amount8,amount10);
-
+		HBox amountBox = new HBox(20,amount1, amount4, amount8,amount10);
+		Label spots = new Label("How many spots?");
+		spots.setFont(Font.font("Verdana", 10));
+		spots.setAlignment(Pos.BASELINE_RIGHT);
+		spots.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
 		// then asks users to place bet
 		Label bets = new Label("How much do you want to bet?");
+		bets.setFont(Font.font("Verdana", 10));
+		bets.setAlignment(Pos.BASELINE_RIGHT);
+		bets.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
 		Button bet1 = new Button("$1");
 		Button bet2 = new Button("$2");
 		Button bet3 = new Button("$3");
@@ -197,6 +210,9 @@ public class JavaFXTemplate extends Application {
 
 		// then asks users to pick number of games
 		Label games = new Label("How many games do you want to play?");
+		games.setFont(Font.font("Verdana", 10));
+		games.setAlignment(Pos.BASELINE_RIGHT);
+		games.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
 		Button games1 = new Button("1");
 		Button games2 = new Button("2");
 		Button games3 = new Button("3");
@@ -219,68 +235,206 @@ public class JavaFXTemplate extends Application {
 
 		Button button = new Button("NEXT");
 		button.setOnAction(e -> window.setScene(scene3));
-
+		HBox button2 = new HBox(20,button);
 		button.setDisable(true);
+		bet1.setDisable(true);
+		bet2.setDisable(true);
+		bet3.setDisable(true);
+		bet4.setDisable(true);
+		bet5.setDisable(true);
+		bet10.setDisable(true);
+		bet15.setDisable(true);
+		bet20.setDisable(true);
+		games1.setDisable(true);
+		games2.setDisable(true);
+		games3.setDisable(true);
+		games4.setDisable(true);
+		games5.setDisable(true);
+		games10.setDisable(true);
+		games15.setDisable(true);
+		games20.setDisable(true);
 		amount1.setOnAction((ActionEvent) -> {
-			button.setDisable(false);
+			bet1.setDisable(false);
+			bet2.setDisable(false);
+			bet3.setDisable(false);
+			bet4.setDisable(false);
+			bet5.setDisable(false);
+			bet10.setDisable(false);
+			bet15.setDisable(false);
+			bet20.setDisable(false);
+
 		});
 		amount4.setOnAction((ActionEvent) -> {
-			button.setDisable(false);
+			bet1.setDisable(false);
+			bet2.setDisable(false);
+			bet3.setDisable(false);
+			bet4.setDisable(false);
+			bet5.setDisable(false);
+			bet10.setDisable(false);
+			bet15.setDisable(false);
+			bet20.setDisable(false);
 		});
 		amount8.setOnAction((ActionEvent) -> {
-			button.setDisable(false);
+			bet1.setDisable(false);
+			bet2.setDisable(false);
+			bet3.setDisable(false);
+			bet4.setDisable(false);
+			bet5.setDisable(false);
+			bet10.setDisable(false);
+			bet15.setDisable(false);
+			bet20.setDisable(false);
 		});
 		amount10.setOnAction((ActionEvent) -> {
+			bet1.setDisable(false);
+			bet2.setDisable(false);
+			bet3.setDisable(false);
+			bet4.setDisable(false);
+			bet5.setDisable(false);
+			bet10.setDisable(false);
+			bet15.setDisable(false);
+			bet20.setDisable(false);
+		});
+		bet1.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet2.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet3.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet4.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet5.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet10.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet15.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		bet20.setOnAction((ActionEvent) ->{
+			games1.setDisable(false);
+			games2.setDisable(false);
+			games3.setDisable(false);
+			games4.setDisable(false);
+			games5.setDisable(false);
+			games10.setDisable(false);
+			games15.setDisable(false);
+			games20.setDisable(false);
+		});
+		games1.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games2.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games3.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games4.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games5.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games10.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games15.setOnAction((ActionEvent)->{
+			button.setDisable(false);
+		});
+		games20.setOnAction((ActionEvent)->{
 			button.setDisable(false);
 		});
 		//layout2.getChildren().addAll(menu2);
 		borderPane.setBackground(background2);
-		borderPane.getChildren().addAll(menu2,amountBox,betBox,gamesBox);
-		borderPane.getChildren().addAll(button);
-		// need a function to save results
+		borderPane.getChildren().addAll(menu2,spots,amountBox,bets,betBox,games,gamesBox,button);
+
+
+		//scene 3 with gridpane
 		VBox border2 = new VBox(10);
 		scene3 = new Scene(border2, 800, 640);
 
-		//save.setOnAction(event -> Player.storecardSelection());
-
-		// next screen displays grid and options
-		GridPane grid_screen = new GridPane();
-		grid_screen.setDisable(true);
-		grid_screen.setAlignment(Pos.CENTER);
-		grid_screen.setHgap(10);
-		grid_screen.setVgap(10);
-		grid_screen.add(spots, 0, 0);
-		//grid_screen.add(spots_txt, 1, 0);
-		grid_screen.add(bets, 0, 1);
-		//grid_screen.add(bets_txt, 1, 1);
-		grid_screen.add(games, 0, 2);
-		//grid_screen.add(games_txt, 1, 2);
-		grid_screen.add(button, 0, 3);
-
 		// user pick numbers from grid
 		Label pick_num = new Label("Pick spots:");
-
+		pick_num.setFont(Font.font("Verdana", 10));
+		pick_num.setAlignment(Pos.BASELINE_RIGHT);
+		pick_num.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
 		GridPane num = new GridPane();
 		num.setAlignment(Pos.CENTER);
-		num.setHgap(5);
-		num.setVgap(5);
+
 		// need function that checks for numbers that ar ebeing selected
 		for (int i = 1; i <= 80; i++) {
 			Button num_select = new Button(String.valueOf(i));
 			num_select.setPrefSize(50, 50);
-			//num_select.setOnAction(event -> select_function(num_select));
+			num_select.setOnAction((ActionEvent) -> {
+				Player.storecardSelection(Integer.parseInt(num_select.getText()), num_select.isPressed());
+			});
+
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
 		}
 		// need function that displays for numbers that are selected
 		Button next = new Button("Next");
-		//next.setOnAction(event -> display_numbers(primaryStage));
-		VBox pickScreen = new VBox(10);
-		pickScreen.setAlignment(Pos.CENTER);
-		pickScreen.getChildren().addAll(spots, num, next);
+
+		border2.getChildren().addAll(pick_num, num, next);
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
 		window.show();
+		//String image = JavaFXApplication19.class.getResource("https://amymhaddad.s3.amazonaws.com/morocco-blue.png").toExternalForm();
+
 	}
 	// things needed still:
 	// function for randomizing the numbers
