@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,7 +26,7 @@ public class JavaFXTemplate extends Application {
 	private final int TOTAL_DRAWINGS = 20;
 	private int i = 0,j = 0, k = 0;
 	Stage window;
-	Scene scene1, scene2, scene3, scene4, scene5, currentScene;
+	Scene scene1, scene2, scene3, scene4, scene5, cuMrrentScene;
 	//public static TextArea t2;
 	public static Stage stage;
 
@@ -493,6 +494,21 @@ public class JavaFXTemplate extends Application {
 				btn.setStyle("-fx-text-fill: #af804f; -fx-font: 18 \"Serif\"; -fx-border-color: #F0D2C1;");
 			}
 		});
+
+		// last scene of game
+		Button new_game = new Button("New Game");
+		new_game.setOnAction(event -> window.setScene(scene5));
+		new_game.setAlignment(Pos.CENTER);
+		new_game.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
+
+		Text end_message = new Text();
+		end_message.setText("Thanks for playing!\n" +
+				"\n" +
+				"Get Help:" +
+				"Hotline #: 1-800-522-4700");
+		end_message.setTextAlignment(TextAlignment.CENTER);
+
+
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
