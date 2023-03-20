@@ -26,7 +26,7 @@ public class JavaFXTemplate extends Application {
 	private final int TOTAL_DRAWINGS = 20;
 	private int i = 0,j = 0, k = 0;
 	Stage window;
-	Scene scene1, scene2, scene3, scene4, scene5, cuMrrentScene;
+	Scene scene1, scene2, scene3, scene4, scene5, cuMrrentScene,currentScene;
 	//public static TextArea t2;
 	public static Stage stage;
 
@@ -472,7 +472,21 @@ public class JavaFXTemplate extends Application {
 		vbox21.getChildren().addAll(selectedChoiceText, selectedChoice);
 		HBox hbox12 = new HBox(30);
 		hbox12.getChildren().addAll(vbox1, vbox21,slotResults);
-		border2.getChildren().addAll(menu3,checkBoxBox,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
+		VBox border3 = new VBox(10);
+		scene5 = new Scene(border3, 800, 640);
+		Button new_game = new Button("New Game");
+		new_game.setOnAction(event -> window.setScene(scene5));
+		new_game.setAlignment(Pos.CENTER);
+		new_game.setStyle("-fx-text-fill:lightblue;-fx-font: 10px \"Serif\";");
+
+		Text end_message = new Text();
+		end_message.setText("Thanks for playing!\n" +
+				"\n" +
+				"Get Help:" +
+				"Hotline #: 1-800-522-4700");
+		end_message.setTextAlignment(TextAlignment.CENTER);
+		border3.getChildren().addAll(end_message);
+		border2.getChildren().addAll(menu3,checkBoxBox,pick_num, num,next,new_game,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
 		dark.setOnAction((ActionEvent)->{
 			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
 			border2.setStyle("-fx-background-color: Gray");
@@ -496,17 +510,8 @@ public class JavaFXTemplate extends Application {
 		});
 
 		// last scene of game
-		Button new_game = new Button("New Game");
-		new_game.setOnAction(event -> window.setScene(scene5));
-		new_game.setAlignment(Pos.CENTER);
-		new_game.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
 
-		Text end_message = new Text();
-		end_message.setText("Thanks for playing!\n" +
-				"\n" +
-				"Get Help:" +
-				"Hotline #: 1-800-522-4700");
-		end_message.setTextAlignment(TextAlignment.CENTER);
+
 
 
 
