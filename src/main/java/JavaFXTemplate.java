@@ -142,10 +142,7 @@ public class JavaFXTemplate extends Application {
 		});
 		MenuBar menuBar2 = new MenuBar();
 		menuBar2.getMenus().addAll(rulesMenu2, winOddsMenu2,newlook, exit2);
-		dark.setOnAction((ActionEvent)->{
-			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
-			menuBar2.setStyle("-fx-background-color: DarkGrey");
-		});
+
 		HBox menu2 = new HBox(20);
 		menu2.getChildren().add(menuBar2);
 
@@ -163,7 +160,6 @@ public class JavaFXTemplate extends Application {
 		amount8.setToggleGroup(amountRadioGroup);
 		amount10.setToggleGroup(amountRadioGroup);
 		amountRadioGroup.selectToggle(amount1);
-//		GridPane screen_layout = new GridPane();
 
 		borderPane.setAlignment(Pos.TOP_LEFT);
 
@@ -183,34 +179,11 @@ public class JavaFXTemplate extends Application {
 		bets.setAlignment(Pos.BASELINE_RIGHT);
 		bets.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
 		RadioButton bet1 = new RadioButton("$1");
-		RadioButton bet2 = new RadioButton("$2");
-		RadioButton bet3 = new RadioButton("$3");
-		RadioButton bet4 = new RadioButton("$4");
-		RadioButton bet5 = new RadioButton("$5");
-		RadioButton bet10 = new RadioButton("$10");
-		RadioButton bet15 = new RadioButton("$15");
-		RadioButton bet20 = new RadioButton("$20");
 		ToggleGroup betRadioGroup = new ToggleGroup();
 		bet1.setToggleGroup(betRadioGroup);
-		bet3.setToggleGroup(betRadioGroup);
-		bet4.setToggleGroup(betRadioGroup);
-		bet5.setToggleGroup(betRadioGroup);
-		bet10.setToggleGroup(betRadioGroup);
-		bet15.setToggleGroup(betRadioGroup);
-		bet2.setToggleGroup(betRadioGroup);
-		bet20.setToggleGroup(betRadioGroup);
-		betRadioGroup.selectToggle(bet1);
 
 		bet1.setOnAction(e->Player.set_Bet(1));
-		bet2.setOnAction(e->Player.set_Bet(2));
-		bet3.setOnAction(e->Player.set_Bet(3));
-		bet4.setOnAction(e->Player.set_Bet(4));
-		bet5.setOnAction(e->Player.set_Bet(5));
-		bet10.setOnAction(e->Player.set_Bet(10));
-		bet15.setOnAction(e->Player.set_Bet(15));
-		bet20.setOnAction(e->Player.set_Bet(20));
-		HBox betBox = new HBox(20, bet1, bet2, bet3,bet4,bet5,bet10,bet15,bet20);
-
+		HBox betBox = new HBox(20, bet1);
 
 
 
@@ -225,97 +198,44 @@ public class JavaFXTemplate extends Application {
 		RadioButton games2 = new RadioButton("2");
 		RadioButton games3 = new RadioButton("3");
 		RadioButton games4 = new RadioButton("4");
-		RadioButton games5 = new RadioButton("5");
-		RadioButton games10 = new RadioButton("10");
-		RadioButton games15 = new RadioButton("15");
-		RadioButton games20 = new RadioButton("20");
 		ToggleGroup gamesRadioGroup = new ToggleGroup();
 		games1.setToggleGroup(gamesRadioGroup);
 		games2.setToggleGroup(gamesRadioGroup);
 		games3.setToggleGroup(gamesRadioGroup);
 		games4.setToggleGroup(gamesRadioGroup);
-		games5.setToggleGroup(gamesRadioGroup);
-		games10.setToggleGroup(gamesRadioGroup);
-		games15.setToggleGroup(gamesRadioGroup);
-		games20.setToggleGroup(gamesRadioGroup);
 
 
 		games1.setOnAction(e->Player.set_Draws(1));
 		games2.setOnAction(e->Player.set_Draws(2));
 		games3.setOnAction(e->Player.set_Draws(3));
 		games4.setOnAction(e->Player.set_Draws(4));
-		games5.setOnAction(e->Player.set_Draws(5));
-		games10.setOnAction(e->Player.set_Draws(10));
-		games15.setOnAction(e->Player.set_Draws(15));
-		games20.setOnAction(e->Player.set_Draws(20));
-		HBox gamesBox = new HBox(20, games1, games2, games3,games4,games5,games10,games15,games20);
+		HBox gamesBox = new HBox(20, games1, games2, games3,games4);
 
 		Button button = new Button("NEXT");
 		button.setOnAction(e -> window.setScene(scene3));
-		HBox button2 = new HBox(20,button);
-		// manages the bets 
-  button.setDisable(true);
+		button.setDisable(true);
 		bet1.setDisable(true);
-		bet2.setDisable(true);
-		bet3.setDisable(true);
-		bet4.setDisable(true);
-		bet5.setDisable(true);
-		bet10.setDisable(true);
-		bet15.setDisable(true);
-		bet20.setDisable(true);
 		games1.setDisable(true);
 		games2.setDisable(true);
 		games3.setDisable(true);
 		games4.setDisable(true);
-		games5.setDisable(true);
-		games10.setDisable(true);
-		games15.setDisable(true);
-		games20.setDisable(true);
 
 		amount1.setOnAction((ActionEvent) -> {
 			amount1.setEffect(shadow);
 			bet1.setDisable(false);
-			bet2.setDisable(false);
-			bet3.setDisable(false);
-			bet4.setDisable(false);
-			bet5.setDisable(false);
-			bet10.setDisable(false);
-			bet15.setDisable(false);
-			bet20.setDisable(false);
 
 		});
 		amount4.setOnAction((ActionEvent) -> {
 			amount4.setEffect(shadow);
 			bet1.setDisable(false);
-			bet2.setDisable(false);
-			bet3.setDisable(false);
-			bet4.setDisable(false);
-			bet5.setDisable(false);
-			bet10.setDisable(false);
-			bet15.setDisable(false);
-			bet20.setDisable(false);
 		});
 		amount8.setOnAction((ActionEvent) -> {
 			amount8.setEffect(shadow);
 			bet1.setDisable(false);
-			bet2.setDisable(false);
-			bet3.setDisable(false);
-			bet4.setDisable(false);
-			bet5.setDisable(false);
-			bet10.setDisable(false);
-			bet15.setDisable(false);
-			bet20.setDisable(false);
 		});
 		amount10.setOnAction((ActionEvent) -> {
 			amount10.setEffect(shadow);
 			bet1.setDisable(false);
-			bet2.setDisable(false);
-			bet3.setDisable(false);
-			bet4.setDisable(false);
-			bet5.setDisable(false);
-			bet10.setDisable(false);
-			bet15.setDisable(false);
-			bet20.setDisable(false);
 		});
 		bet1.setOnAction((ActionEvent) ->{
 			bet1.setEffect(shadow);
@@ -323,88 +243,8 @@ public class JavaFXTemplate extends Application {
 			games2.setDisable(false);
 			games3.setDisable(false);
 			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
 		});
-		bet2.setOnAction((ActionEvent) ->{
-			bet2.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
-		bet3.setOnAction((ActionEvent) ->{
-			bet3.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
-		bet4.setOnAction((ActionEvent) ->{
-			bet4.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
-		bet5.setOnAction((ActionEvent) ->{
-			bet5.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
-		bet10.setOnAction((ActionEvent) ->{
-			bet10.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
-		bet15.setOnAction((ActionEvent) ->{
-			bet15.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
-		bet20.setOnAction((ActionEvent) ->{
-			bet20.setEffect(shadow);
-			games1.setDisable(false);
-			games2.setDisable(false);
-			games3.setDisable(false);
-			games4.setDisable(false);
-			games5.setDisable(false);
-			games10.setDisable(false);
-			games15.setDisable(false);
-			games20.setDisable(false);
-		});
+//
 		games1.setOnAction((ActionEvent)->{
 			games1.setEffect(shadow);
 			button.setDisable(false);
@@ -421,23 +261,7 @@ public class JavaFXTemplate extends Application {
 			button.setDisable(false);
 			games4.setEffect(shadow);
 		});
-		games5.setOnAction((ActionEvent)->{
-			button.setDisable(false);
-			games5.setEffect(shadow);
-		});
-		games10.setOnAction((ActionEvent)->{
-			button.setDisable(false);
-			games10.setEffect(shadow);
-		});
-		games15.setOnAction((ActionEvent)->{
-			button.setDisable(false);
-			games15.setEffect(shadow);
-		});
-		games20.setOnAction((ActionEvent)->{
-			button.setDisable(false);
-			games20.setEffect(shadow);
-		});
-		//layout2.getChildren().addAll(menu2);
+
 		borderPane.setBackground(background2);
 		borderPane.getChildren().addAll(menu2,spots,amountBox,bets,betBox,games,gamesBox,button);
 
@@ -475,31 +299,30 @@ public class JavaFXTemplate extends Application {
 		Label amountWonNotice = new Label("Amount Won:");
 		Label amountWonOutput = new Label("NILL");
 		Label selectedChoiceText = new Label("Choices Provided:");
-		//Label selectedChoice = new Label("NILL");
 		Label selectedBetText = new Label("Bet");
 		Label selectedBet = new Label("NILL");
 		Label totalBetText = new Label("Total Bet");
 		Label totalBet = new Label("NILL");
-		Label noOfMatchedText = new Label("No. of Matched Items");
-		Label itemsMatchedText = new Label("Matched Items");
-		Label wonText = new Label("Won");
-		Label drawNoText = new Label("Draw");
+		Label drawsMatched = new Label("No. of Matched Items");
+		Label drawsMatchedList = new Label("Matched Items");
+		Label drawText = new Label("Draw");
+		Label drawWins = new Label("Won");
 		Label draw1 = new Label("1");
 		Label draw2 = new Label("2");
 		Label draw3 = new Label("3");
 		Label draw4 = new Label("4");
-		Label oneNoOfMatched = new Label("NILL");
-		Label oneItemsMatched = new Label("NILL");
-		Label oneWon = new Label("NILL");
-		Label twoNoOfMatched = new Label("NILL");
-		Label twoItemsMatched = new Label("NILL");
-		Label twoWon = new Label("NILL");
-		Label threeNoOfMatched = new Label("NILL");
-		Label threeItemsMatched = new Label("NILL");
-		Label threeWon = new Label("NILL");
-		Label fourNoOfMatched = new Label("NILL");
-		Label fourItemsMatched = new Label("NILL");
-		Label fourWon = new Label("NILL");
+		Label draw1Matched = new Label("NILL");
+		Label draw1MatchedList = new Label("NILL");
+		Label draw1Won = new Label("NILL");
+		Label draw2Matched = new Label("NILL");
+		Label draw2MatchedList = new Label("NILL");
+		Label draw2Won = new Label("NILL");
+		Label draw3Matched = new Label("NILL");
+		Label draw3MatchedList = new Label("NILL");
+		Label draw3Won = new Label("NILL");
+		Label draw4Matched = new Label("NILL");
+		Label draw4MatchedList = new Label("NILL");
+		Label draw4Won = new Label("NILL");
 		// need function that displays for numbers that are selected
 		HBox drawBox = new HBox(10);
 		drawBox.getChildren().addAll(drawNotice, drawOutput, amountWonNotice, amountWonOutput);
@@ -508,14 +331,14 @@ public class JavaFXTemplate extends Application {
 			RadioButton sRB = (RadioButton) amountRadioGroup.getSelectedToggle();
 			String str = sRB.getText();
 			selectedChoice.setText("Amount"+str);
-			if (Player.spotsSelect(Integer.valueOf(str)) == true&&Player.getNoOfDraws() > 0) {
+			if (Player.spotsSelect(Integer.valueOf(str)) == true&&Player.getDraws() > 0) {
 				Player.nextDraw();
-				RadioButton nRB = (RadioButton) gamesRadioGroup.getSelectedToggle();
-				String nstr = nRB.getText();
+				RadioButton drawrb = (RadioButton) gamesRadioGroup.getSelectedToggle();
+				String drawstr = drawrb.getText();
 				numSelected.setText(String.valueOf("Selected spots"+Player.getTotalSelectedSpots()));
 				selectedChoice.setText(Player.getSelectedList());
 				selectedBet.setText("$" + Player.getplayBet());
-				totalBet.setText("$" + Player.getplayBet() * Integer.parseInt(nstr));
+				totalBet.setText("$" + Player.getplayBet() * Integer.parseInt(drawstr));
 				help.setText("Drawing!");
 				Player.draw();
 				Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
@@ -533,8 +356,7 @@ public class JavaFXTemplate extends Application {
 							String tempAmount;
 
 							help.setText("Continue to Next Draw");
-							String nstr = String.valueOf(Player.getDraws());
-							if (Integer.parseInt(nstr) == Player.getCurrentDraw()) {
+							if (Integer.parseInt(drawstr) == Player.getCurrentDraw()) {
 								help.setText("Game Over");
 								next.setDisable(true);
 
@@ -547,23 +369,23 @@ public class JavaFXTemplate extends Application {
 							amountWonOutput.setText("$" + Player.getTotalWinning());
 
 							if (Player.getCurrentDraw() == 1) {
-								oneNoOfMatched.setText(Player.getMatchedSize());
-								oneItemsMatched.setText(Player.getMatchedList());
-								oneWon.setText("$" + tempAmount);
+								draw1Matched.setText(Player.getMatchedSize());
+								draw1MatchedList.setText(Player.getMatchedList());
+								draw1Won.setText("$" + tempAmount);
 							} else if (Player.getCurrentDraw() == 2) {
-								twoNoOfMatched.setText(Player.getMatchedSize());
-								twoItemsMatched.setText(Player.getMatchedList());
-								twoWon.setText("$" + tempAmount);
+								draw2Matched.setText(Player.getMatchedSize());
+								draw2MatchedList.setText(Player.getMatchedList());
+								draw2Won.setText("$" + tempAmount);
 							} else if (Player.getCurrentDraw() == 3) {
-								threeNoOfMatched.setText(Player.getMatchedSize());
-								threeItemsMatched.setText(Player.getMatchedList());
-								threeWon.setText("$" + tempAmount);
+								draw3Matched.setText(Player.getMatchedSize());
+								draw3MatchedList.setText(Player.getMatchedList());
+								draw3Won.setText("$" + tempAmount);
 							} else if (Player.getCurrentDraw() == 4) {
-								fourNoOfMatched.setText(Player.getMatchedSize());
-								fourItemsMatched.setText(Player.getMatchedList());
-								fourWon.setText("$" + tempAmount);
+								draw4Matched.setText(Player.getMatchedSize());
+								draw4MatchedList.setText(Player.getMatchedList());
+								draw4Won.setText("$" + tempAmount);
 							} else {
-								throw new RuntimeException("Illegal Draw");
+								throw new RuntimeException("Nope Can't Do That");
 							}
 
 							// Reset
@@ -582,47 +404,71 @@ public class JavaFXTemplate extends Application {
 			}
 			else {
 				// do Warn User
-				help.setText("Check Your Spots");
+				help.setText("Wrong Input");
 			}
 		});
 		VBox vbox1 = new VBox(10);
 		VBox vbox21 = new VBox(10);
-		VBox vbox2 = new VBox(10);
-		HBox drawAndClear = new HBox(20);
+		GridPane slotResults = new GridPane();
+		slotResults.setHgap(30);
+		slotResults.setVgap(10);
+
+		slotResults.add(drawText, 0, 0, 1, 1);
+		slotResults.add(drawsMatched, 1, 0, 1, 1);
+		slotResults.add(drawsMatchedList, 2, 0, 1, 1);
+		slotResults.add(drawWins, 3, 0, 1, 1);
+
+		slotResults.add(draw1, 0, 1, 1, 1);
+		slotResults.add(draw1Matched, 1, 1, 1, 1);
+		slotResults.add(draw1MatchedList, 2, 1, 1, 1);
+		slotResults.add(draw1Won, 3, 1, 1, 1);
+
+		slotResults.add(draw2, 0, 2, 1, 1);
+		slotResults.add(draw2Matched, 1, 2, 1, 1);
+		slotResults.add(draw2MatchedList, 2, 2, 1, 1);
+		slotResults.add(draw2Won, 3, 2, 1, 1);
+
+		slotResults.add(draw3, 0, 3, 1, 1);
+		slotResults.add(draw3Matched, 1, 3, 1, 1);
+		slotResults.add(draw3MatchedList, 2, 3, 1, 1);
+		slotResults.add(draw3Won, 3, 3, 1, 1);
+
+		slotResults.add(draw4, 0, 4, 1, 1);
+		slotResults.add(draw4Matched, 1, 4, 1, 1);
+		slotResults.add(draw4MatchedList, 2, 4, 1, 1);
+		slotResults.add(draw4Won, 3, 4, 1, 1);
 		vbox1.getChildren().addAll(selectedBetText, selectedBet, totalBetText, totalBet);
-
 		vbox21.getChildren().addAll(selectedChoiceText, selectedChoice);
-
 		HBox hbox12 = new HBox(30);
-		hbox12.getChildren().addAll(vbox1, vbox21);
-
-		//next.setOnAction(e -> window.setScene(scene4));
+		hbox12.getChildren().addAll(vbox1, vbox21,slotResults);
 		border2.getChildren().addAll(menu3,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
-		//scene 4
-		//scene 3 with grid pane
-		VBox border4 = new VBox(10);
-		scene4 = new Scene(border4, 800, 640);
-		Label draw = new Label("Draw Results:");
-		Label winning = new Label("Total Winnings:");
-		HBox resultsbox = new HBox(10);
-		resultsbox.getChildren().addAll(draw,winning);
-		//border4.getChildren().addAll(resultsbox,selectedChoice,numSelected);
+		dark.setOnAction((ActionEvent)->{
+			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
+			border2.setStyle("-fx-background-color: Gray");
+			menuBar2.setStyle("-fx-background-color: DarkGrey");
+			for (i = 1; i <= 80; i++) {
+				ToggleButton btn = new ToggleButton();
+				btn = selectNumbers.get(i - 1);
+				btn.setStyle("-fx-text-fill: Grey; -fx-font: 16 \"Serif\"; -fx-border-color: Black;");
+			}
+
+		});
+		light.setOnAction((ActionEvent)-> {
+			borderPane.setStyle("-fx-padding:5; -fx-background-color: #F5F5DC ");
+			border2.setStyle("-fx-background-color: #D3B69C");
+			menuBar2.setStyle("-fx-background-color: White");
+			for (i = 1; i <= 80; i++) {
+				ToggleButton btn = new ToggleButton();
+				btn = selectNumbers.get(i - 1);
+				btn.setStyle("-fx-text-fill: #af804f; -fx-font: 18 \"Serif\"; -fx-border-color: #F0D2C1;");
+			}
+		});
 
 		window.setScene(scene1);
 		window.setTitle("KENO");
 		window.show();
-		//String image = JavaFXApplication19.class.getResource("https://amymhaddad.s3.amazonaws.com/morocco-blue.png").toExternalForm();
 
 	}
-	// things needed still:
-	// function for randomizing the numbers
-	// adding up total winnings
-	// final screen displaying done
-	// pause transitions in gridu
-	// updates grids based on 4 spots choices
-	// update background with cool image
-	// start drawing grid button // done
-	// next screen will start drawing then display numbers and the total winnings
 
 
 }

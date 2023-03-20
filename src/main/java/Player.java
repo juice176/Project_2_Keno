@@ -24,6 +24,49 @@ public class Player {
         this.drawings = 20;
         this.totalWinnings = 0;
     }
+
+
+    //set number of spots
+    public static void set_Value(int value) {
+        spot = value;
+    }
+    //set number of bets
+    static void set_Bet(int value){
+        playBet = value;
+    }
+    //set number of draws
+    static void set_Draws(int value){
+        drawings = value;
+    }
+    static Integer getTotalWinning(){
+        return totalWinnings;
+    }
+    static Integer getSpot(){
+        return spot;
+    }
+    static int getplayBet(){
+        return playBet;
+    }
+    static Integer getDraws(){
+        return drawings;
+    }
+    static int getDraw(int index){
+        return drawing[index];
+    }
+    // Decrement sub-draws by 1, 1 drawing completes
+    static void decrementNoOfDraws() {
+        drawings--;
+    }
+
+    // Returns which Draw is executing
+    static int getCurrentDraw() {
+        return counter;
+    }
+
+    // increments drawCounter when 1 draw completes a.k.a 20 sub-draws
+    static void nextDraw() {
+        counter++;
+    }
     //setting the card by userinput
     static void storecardSelection(String value, boolean pressButton){
         if(pressButton == true){
@@ -41,16 +84,6 @@ public class Player {
 
         return listString.toString();
     }
-
-    // updates game arraylist when spot is selected
-//    static boolean addArray(Button num_select){
-//        if(num_select.fire() == spot) {
-//            System.out.println("Reached Max spots");
-//            return false;
-//        }
-//        num_select.add(game);
-//        return true;
-//    }
 
     static boolean spotsSelect(Integer input){
         Integer buttons = game.size();
@@ -86,70 +119,10 @@ public class Player {
 
     }
 
-    static void reset(){
-        game.clear();
-        playBet = 0;
-        spot = 0;
-        totalWinnings = 0;
-    }
-
-    private int value;
     static int getTotalSelectedSpots() {
         return game.size();
     }
 
-    // 20 sub-draw = 1 draw, 40 sub-draw = 2 draw, ...
-    static void setNoOfDraws(int value) {
-        drawings = value;
-    }
-
-    // Decrement sub-draws by 1, 1 drawing completes
-    static void decrementNoOfDraws() {
-        drawings--;
-    }
-
-    // total sub-draws remaining
-    static int getNoOfDraws() {
-        return drawings;
-    }
-
-    // Returns which Draw is executing
-    static int getCurrentDraw() {
-        return counter;
-    }
-
-    // increments drawCounter when 1 draw completes a.k.a 20 sub-draws
-    static void nextDraw() {
-        counter++;
-    }
-
-//set number of spots
-    public static void set_Value(int value) {
-        spot = value;
-    }
-    //set number of bets
-    static void set_Bet(int value){
-        playBet = value;
-    }
-    //set number of draws
-    static void set_Draws(int value){
-        drawings = value;
-    }
-    static Integer getTotalWinning(){
-        return totalWinnings;
-    }
-    static Integer getSpot(){
-        return spot;
-    }
-    static int getplayBet(){
-        return playBet;
-    }
-    static Integer getDraws(){
-        return drawings;
-    }
-    static int getDraw(int index){
-        return drawing[index];
-    }
 
     static String getMatchedSize() {
         return Integer.toString(list.size());
@@ -179,7 +152,7 @@ public class Player {
         list.retainAll(game);
 
         out = Odds.gameChart(game.size(), list.size(), spot);
-        spot += Integer.parseInt(out);
+        totalWinnings += Integer.parseInt(out);
         return out;
     }
 }
