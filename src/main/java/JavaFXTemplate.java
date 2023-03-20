@@ -153,11 +153,16 @@ public class JavaFXTemplate extends Application {
 		// updates:
 		// asks user to pick spots
 		//version 2
-		Button amount1 = new Button("1");
-		Button amount4 = new Button("4");
-		Button amount8 = new Button("8");
-		Button amount10 = new Button("10");
-
+		ToggleGroup amountRadioGroup = new ToggleGroup();
+		RadioButton amount1 = new RadioButton("1");
+		RadioButton amount4 = new RadioButton("4");
+		RadioButton amount8 = new RadioButton("8");
+		RadioButton amount10 = new RadioButton("10");
+		amount1.setToggleGroup(amountRadioGroup);
+		amount4.setToggleGroup(amountRadioGroup);
+		amount8.setToggleGroup(amountRadioGroup);
+		amount10.setToggleGroup(amountRadioGroup);
+		amountRadioGroup.selectToggle(amount1);
 //		GridPane screen_layout = new GridPane();
 
 		borderPane.setAlignment(Pos.TOP_LEFT);
@@ -177,15 +182,24 @@ public class JavaFXTemplate extends Application {
 		bets.setFont(Font.font("Verdana", 10));
 		bets.setAlignment(Pos.BASELINE_RIGHT);
 		bets.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
-		Button bet1 = new Button("$1");
-		Button bet2 = new Button("$2");
-		Button bet3 = new Button("$3");
-		Button bet4 = new Button("$4");
-		Button bet5 = new Button("$5");
-		Button bet10 = new Button("$10");
-		Button bet15 = new Button("$15");
-		Button bet20 = new Button("$20");
-
+		RadioButton bet1 = new RadioButton("$1");
+		RadioButton bet2 = new RadioButton("$2");
+		RadioButton bet3 = new RadioButton("$3");
+		RadioButton bet4 = new RadioButton("$4");
+		RadioButton bet5 = new RadioButton("$5");
+		RadioButton bet10 = new RadioButton("$10");
+		RadioButton bet15 = new RadioButton("$15");
+		RadioButton bet20 = new RadioButton("$20");
+		ToggleGroup betRadioGroup = new ToggleGroup();
+		bet1.setToggleGroup(betRadioGroup);
+		bet3.setToggleGroup(betRadioGroup);
+		bet4.setToggleGroup(betRadioGroup);
+		bet5.setToggleGroup(betRadioGroup);
+		bet10.setToggleGroup(betRadioGroup);
+		bet15.setToggleGroup(betRadioGroup);
+		bet2.setToggleGroup(betRadioGroup);
+		bet20.setToggleGroup(betRadioGroup);
+		betRadioGroup.selectToggle(bet1);
 
 		bet1.setOnAction(e->Player.set_Bet(1));
 		bet2.setOnAction(e->Player.set_Bet(2));
@@ -207,14 +221,23 @@ public class JavaFXTemplate extends Application {
 		games.setFont(Font.font("Verdana", 10));
 		games.setAlignment(Pos.BASELINE_RIGHT);
 		games.setStyle("-fx-text-fill:lightblue;-fx-font: 40px \"Serif\";");
-		Button games1 = new Button("1");
-		Button games2 = new Button("2");
-		Button games3 = new Button("3");
-		Button games4 = new Button("4");
-		Button games5 = new Button("5");
-		Button games10 = new Button("10");
-		Button games15 = new Button("15");
-		Button games20 = new Button("20");
+		RadioButton games1 = new RadioButton("1");
+		RadioButton games2 = new RadioButton("2");
+		RadioButton games3 = new RadioButton("3");
+		RadioButton games4 = new RadioButton("4");
+		RadioButton games5 = new RadioButton("5");
+		RadioButton games10 = new RadioButton("10");
+		RadioButton games15 = new RadioButton("15");
+		RadioButton games20 = new RadioButton("20");
+		ToggleGroup gamesRadioGroup = new ToggleGroup();
+		games1.setToggleGroup(gamesRadioGroup);
+		games2.setToggleGroup(gamesRadioGroup);
+		games3.setToggleGroup(gamesRadioGroup);
+		games4.setToggleGroup(gamesRadioGroup);
+		games5.setToggleGroup(gamesRadioGroup);
+		games10.setToggleGroup(gamesRadioGroup);
+		games15.setToggleGroup(gamesRadioGroup);
+		games20.setToggleGroup(gamesRadioGroup);
 
 
 		games1.setOnAction(e->Player.set_Draws(1));
@@ -438,7 +461,7 @@ public class JavaFXTemplate extends Application {
 			ToggleButton num_select = new ToggleButton(String.valueOf(i));
 			num_select.setPrefSize(50, 50);
 			num_select.setOnAction((ActionEvent) -> {
-				Player.storecardSelection(Integer.valueOf(num_select.getText()), num_select.isPressed());
+				Player.storecardSelection(num_select.getText(), num_select.isSelected());
 			});
 			selectNumbers.add(num_select);
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
@@ -477,78 +500,83 @@ public class JavaFXTemplate extends Application {
 		Label fourItemsMatched = new Label("NILL");
 		Label fourWon = new Label("NILL");
 		// need function that displays for numbers that are selected
-
+		HBox drawBox = new HBox(10);
+		drawBox.getChildren().addAll(drawNotice, drawOutput, amountWonNotice, amountWonOutput);
 		next.setOnAction((ActionEvent) -> {
-			selectedChoice.setText(String.valueOf(Player.spotsSelect(Player.getSpot())));
-			if ((Player.spotsSelect(Player.getSpot()))) {
+
+			RadioButton sRB = (RadioButton) amountRadioGroup.getSelectedToggle();
+			String str = sRB.getText();
+			selectedChoice.setText("Amount"+str);
+			if (Player.spotsSelect(Integer.valueOf(str)) == true&&Player.getNoOfDraws() > 0) {
 				Player.nextDraw();
-
-				numSelected.setText(String.valueOf(Player.getTotalSelectedSpots()));
+				RadioButton nRB = (RadioButton) gamesRadioGroup.getSelectedToggle();
+				String nstr = nRB.getText();
+				numSelected.setText(String.valueOf("Selected spots"+Player.getTotalSelectedSpots()));
+				selectedChoice.setText(Player.getSelectedList());
+				selectedBet.setText("$" + Player.getplayBet());
+				totalBet.setText("$" + Player.getplayBet() * Integer.parseInt(nstr));
 				help.setText("Drawing!");
-
-
-
 				Player.draw();
-//				Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-//
-//					@Override
-//					public void handle(ActionEvent event) {
-//						drawOutput.setText(String.valueOf(Player.getDraw(k)));
-//
-//						// Looping until all draws are complete
-//						Player.decrementNoOfDraws();
-//						k++;
-//
-//						// A Draw completes i.e 20 sub draws
-//						if (k == 20) {
-//							String tempAmount;
-//
-//							help.setText("Continue to Next Draw");
-//							String nstr = String.valueOf(Player.getDraws());
-//							if (Integer.parseInt(nstr) == Player.getCurrentDraw()) {
-//								help.setText("Game Over");
-//								next.setDisable(true);
-//
-//							} else {
-//								next.setDisable(false);
-//							}
-//
-//							// Show results
-//							tempAmount = Player.getAmountResult();
-//							amountWonOutput.setText("$" + Player.getTotalWinning());
-//
-//							if (Player.getCurrentDraw() == 1) {
-//								oneNoOfMatched.setText(Player.getMatchedSize());
-//								oneItemsMatched.setText(Player.getMatchedList());
-//								oneWon.setText("$" + tempAmount);
-//							} else if (Player.getCurrentDraw() == 2) {
-//								twoNoOfMatched.setText(Player.getMatchedSize());
-//								twoItemsMatched.setText(Player.getMatchedList());
-//								twoWon.setText("$" + tempAmount);
-//							} else if (Player.getCurrentDraw() == 3) {
-//								threeNoOfMatched.setText(Player.getMatchedSize());
-//								threeItemsMatched.setText(Player.getMatchedList());
-//								threeWon.setText("$" + tempAmount);
-//							} else if (Player.getCurrentDraw() == 4) {
-//								fourNoOfMatched.setText(Player.getMatchedSize());
-//								fourItemsMatched.setText(Player.getMatchedList());
-//								fourWon.setText("$" + tempAmount);
-//							} else {
-//								throw new RuntimeException("Illegal Draw");
-//							}
-//
-//							// Reset
-//							Player.resetDraw();
-//						}
-//					}
-//				}));
-//
-//				// Reset printing draws position to zero
-//				k = 0;
-//
-//				// 20 Draws
-//				timeline.setCycleCount(TOTAL_DRAWINGS - k);
-//				timeline.play();
+				Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+						drawOutput.setText(String.valueOf(Player.getDraw(k)));
+
+						// Looping until all draws are complete
+						Player.decrementNoOfDraws();
+						k++;
+
+						// A Draw completes i.e 20 sub draws
+						if (k == 20) {
+							String tempAmount;
+
+							help.setText("Continue to Next Draw");
+							String nstr = String.valueOf(Player.getDraws());
+							if (Integer.parseInt(nstr) == Player.getCurrentDraw()) {
+								help.setText("Game Over");
+								next.setDisable(true);
+
+							} else {
+								next.setDisable(false);
+							}
+
+							// Show results
+							tempAmount = Player.getAmountResult();
+							amountWonOutput.setText("$" + Player.getTotalWinning());
+
+							if (Player.getCurrentDraw() == 1) {
+								oneNoOfMatched.setText(Player.getMatchedSize());
+								oneItemsMatched.setText(Player.getMatchedList());
+								oneWon.setText("$" + tempAmount);
+							} else if (Player.getCurrentDraw() == 2) {
+								twoNoOfMatched.setText(Player.getMatchedSize());
+								twoItemsMatched.setText(Player.getMatchedList());
+								twoWon.setText("$" + tempAmount);
+							} else if (Player.getCurrentDraw() == 3) {
+								threeNoOfMatched.setText(Player.getMatchedSize());
+								threeItemsMatched.setText(Player.getMatchedList());
+								threeWon.setText("$" + tempAmount);
+							} else if (Player.getCurrentDraw() == 4) {
+								fourNoOfMatched.setText(Player.getMatchedSize());
+								fourItemsMatched.setText(Player.getMatchedList());
+								fourWon.setText("$" + tempAmount);
+							} else {
+								throw new RuntimeException("Illegal Draw");
+							}
+
+							// Reset
+							Player.resetDraw();
+						}
+					}
+				}));
+
+				// Reset printing draws position to zero
+				k = 0;
+
+				// 20 Draws
+				timeline.setCycleCount(TOTAL_DRAWINGS - k);
+				timeline.play();
 
 			}
 			else {
@@ -556,8 +584,19 @@ public class JavaFXTemplate extends Application {
 				help.setText("Check Your Spots");
 			}
 		});
+		VBox vbox1 = new VBox(10);
+		VBox vbox21 = new VBox(10);
+		VBox vbox2 = new VBox(10);
+		HBox drawAndClear = new HBox(20);
+		vbox1.getChildren().addAll(selectedBetText, selectedBet, totalBetText, totalBet);
+
+		vbox21.getChildren().addAll(selectedChoiceText, selectedChoice);
+
+		HBox hbox12 = new HBox(30);
+		hbox12.getChildren().addAll(vbox1, vbox21);
+
 		//next.setOnAction(e -> window.setScene(scene4));
-		border2.getChildren().addAll(menu3,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput);
+		border2.getChildren().addAll(menu3,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
 		//scene 4
 		//scene 3 with grid pane
 		VBox border4 = new VBox(10);

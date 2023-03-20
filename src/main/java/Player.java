@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
-    static ArrayList<Integer> game = new ArrayList<Integer>(); // players user input
+    static ArrayList<String> game = new ArrayList<String>(); // players user input
 
     private static ArrayList<String> list = new ArrayList<String>();//matched outcome
     public static int playBet = 1;
@@ -18,14 +18,14 @@ public class Player {
     // set player
     Player(){
         super();
-        this.game = new ArrayList<Integer>();
+        this.game = new ArrayList<String>();
         this.playBet = 0;
         this.spot = 0;
         this.drawings = 20;
         this.totalWinnings = 0;
     }
     //setting the card by userinput
-    static void storecardSelection(Integer value, boolean pressButton){
+    static void storecardSelection(String value, boolean pressButton){
         if(pressButton == true){
             game.add(value);// store the numbers picked by the user
         }
@@ -36,7 +36,7 @@ public class Player {
     static String getSelectedList() {
         StringBuilder listString = new StringBuilder();
 
-        for (Integer s : game)
+        for (String s : game)
             listString.append(s + ", ");
 
         return listString.toString();
@@ -55,7 +55,7 @@ public class Player {
     static boolean spotsSelect(Integer input){
         Integer buttons = game.size();
         //
-        if((input == 1 && buttons == 1)||(input == 4 && buttons == 4 )|| (input == 8 && buttons == 8 )|| (input == 10 && buttons == 10)){
+        if((input == 1 && buttons == 1 )||(input == 4 && buttons == 4 )|| (input == 8 && buttons == 8 )|| (input == 10 && buttons == 10)){
             return true;
         }
         else{
@@ -141,7 +141,7 @@ public class Player {
     static Integer getSpot(){
         return spot;
     }
-    static Integer getplayBet(){
+    static int getplayBet(){
         return playBet;
     }
     static Integer getDraws(){
