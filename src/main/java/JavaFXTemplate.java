@@ -253,7 +253,8 @@ public class JavaFXTemplate extends Application {
 		Button button = new Button("NEXT");
 		button.setOnAction(e -> window.setScene(scene3));
 		HBox button2 = new HBox(20,button);
-		button.setDisable(true);
+		// manages the bets 
+  button.setDisable(true);
 		bet1.setDisable(true);
 		bet2.setDisable(true);
 		bet3.setDisable(true);
