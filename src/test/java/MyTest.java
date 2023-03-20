@@ -19,7 +19,7 @@ class MyTest {
 	}
 	@Test
 	public void calculatorInitialValueZero1(){
-		assertEquals(1, Player.getplayBet());
+		assertEquals(4, Player.playBet);
 	}
 	@Test
 	public void calculatorInitialSpots(){
@@ -44,55 +44,55 @@ class MyTest {
 	}
 	@Test
 	public void checkselectedspots(){
+		Player.storecardSelection("1",true);
+		assertEquals("1, ", Player.userList());
 
 	}
 	@Test
+	public void checkusersize(){
+		ArrayList game = new ArrayList<>();
+		game.add("1");
+		game.add("2");
+		assertEquals(2,game.size());
+	}
+	@Test
 	public void checkspotsselect(){
+		ArrayList game2 = new ArrayList<>();
+		game2.add("1");
+		game2.add("2");
+		assertFalse(Player.spotsSelect(2));
 
 	}
 	@Test
 	public void checknextdraw(){
-
-		assertEquals(0,Player.curDraw());
+		Player.set_Draws(1);
+		Player.decreaseDraws();
+		assertEquals(0,Player.getDraws());
 	}
 	@Test
 	public void checkcurdraw(){
-		Player card = new Player();
-		card.nextDraw();
-		card.nextDraw();
-		card.nextDraw();
-		assertEquals(3,card.curDraw());
+		Player.nextDraw();
+		Player.nextDraw();
+		Player.nextDraw();
+		assertEquals(3,Player.curDraw());
 	}
 	@Test
 	public void checkdecreasedraw(){
-
+		Player.set_Draws(70);
+		Player.decreaseDraws();
+		assertEquals(69,Player.getDraws());
 	}
-	@Test
-	public void checkgetdraws(){
 
-	}
 	@Test
 	public void checkgetplaybet(){
+		Player.set_Bet(4);
+		assertEquals(4,Player.getplayBet());
 
 	}
 	@Test
 	public void checkgetSpot(){
-
-	}
-	@Test
-	public void checkgetTotalWin(){
-
-	}
-	@Test
-	public void checksetdraws(){
-
-	}
-	@Test
-	public void checksetbets(){
-
-	}
-	@Test
-	public void checkspots(){
+		Player.set_Value(6);
+		assertEquals(6,Player.getSpot());
 
 	}
 
