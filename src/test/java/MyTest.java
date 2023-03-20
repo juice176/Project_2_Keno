@@ -96,17 +96,17 @@ class MyTest {
 
 	}
 
-	@Test
-	public void checkreset(){
-		assertEquals();
+	//@Test
+	//public void checkreset(){
+	//	assertEquals();
 
-	}
+	//}
 
-	@Test
-	public void checkgame(){
-		assertEquals();
+	//@Test
+	//public void checkgame(){
+	//	assertEquals();
 
-	}
+	//}
 
 
 
