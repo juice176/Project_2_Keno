@@ -330,13 +330,13 @@ public class JavaFXTemplate extends Application {
 
 			RadioButton sRB = (RadioButton) amountRadioGroup.getSelectedToggle();
 			String str = sRB.getText();
-			selectedChoice.setText("Amount"+str);
-			if (Player.spotsSelect(Integer.valueOf(str)) == true&&Player.getDraws() > 0) {
+			selectedChoice.setText("Amount" + str);
+			if (Player.spotsSelect(Integer.valueOf(str)) == true && Player.getDraws() > 0) {
 				Player.nextDraw();
 				RadioButton drawrb = (RadioButton) gamesRadioGroup.getSelectedToggle();
 				String drawstr = drawrb.getText();
 				numSelected.setText(String.valueOf("Selected spots"+Player.getTotalSelectedSpots()));
-				selectedChoice.setText(Player.getSelectedList());
+				selectedChoice.setText(Player.userList());
 				selectedBet.setText("$" + Player.getplayBet());
 				totalBet.setText("$" + Player.getplayBet() * Integer.parseInt(drawstr));
 				help.setText("Drawing!");
@@ -348,7 +348,7 @@ public class JavaFXTemplate extends Application {
 						drawOutput.setText(String.valueOf(Player.getDraw(k)));
 
 						// Looping until all draws are complete
-						Player.decrementNoOfDraws();
+						Player.decreaseDraws();
 						k++;
 
 						// A Draw completes i.e 20 sub draws
@@ -356,7 +356,7 @@ public class JavaFXTemplate extends Application {
 							String tempAmount;
 
 							help.setText("Continue to Next Draw");
-							if (Integer.parseInt(drawstr) == Player.getCurrentDraw()) {
+							if (Integer.parseInt(drawstr) == Player.curDraw()) {
 								help.setText("Game Over");
 								next.setDisable(true);
 
@@ -365,24 +365,24 @@ public class JavaFXTemplate extends Application {
 							}
 
 							// Show results
-							tempAmount = Player.getAmountResult();
+							tempAmount = Player.lotteryWinning();
 							amountWonOutput.setText("$" + Player.getTotalWinning());
 
-							if (Player.getCurrentDraw() == 1) {
-								draw1Matched.setText(Player.getMatchedSize());
-								draw1MatchedList.setText(Player.getMatchedList());
+							if (Player.curDraw() == 1) {
+								draw1Matched.setText(Player.userSize());
+								draw1MatchedList.setText(Player.gameList());
 								draw1Won.setText("$" + tempAmount);
-							} else if (Player.getCurrentDraw() == 2) {
-								draw2Matched.setText(Player.getMatchedSize());
-								draw2MatchedList.setText(Player.getMatchedList());
+							} else if (Player.curDraw() == 2) {
+								draw2Matched.setText(Player.userSize());
+								draw2MatchedList.setText(Player.gameList());
 								draw2Won.setText("$" + tempAmount);
-							} else if (Player.getCurrentDraw() == 3) {
-								draw3Matched.setText(Player.getMatchedSize());
-								draw3MatchedList.setText(Player.getMatchedList());
+							} else if (Player.curDraw() == 3) {
+								draw3Matched.setText(Player.userSize());
+								draw3MatchedList.setText(Player.gameList());
 								draw3Won.setText("$" + tempAmount);
-							} else if (Player.getCurrentDraw() == 4) {
-								draw4Matched.setText(Player.getMatchedSize());
-								draw4MatchedList.setText(Player.getMatchedList());
+							} else if (Player.curDraw() == 4) {
+								draw4Matched.setText(Player.userSize());
+								draw4MatchedList.setText(Player.gameList());
 								draw4Won.setText("$" + tempAmount);
 							} else {
 								throw new RuntimeException("Nope Can't Do That");

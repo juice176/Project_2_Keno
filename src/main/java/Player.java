@@ -54,12 +54,12 @@ public class Player {
         return drawing[index];
     }
     // Decrement sub-draws by 1, 1 drawing completes
-    static void decrementNoOfDraws() {
+    static void decreaseDraws() {
         drawings--;
     }
 
     // Returns which Draw is executing
-    static int getCurrentDraw() {
+    static int curDraw() {
         return counter;
     }
 
@@ -76,7 +76,7 @@ public class Player {
             game.remove(value); // remove the numbers not picked by the user
         }
     }
-    static String getSelectedList() {
+    static String userList() {
         StringBuilder listString = new StringBuilder();
 
         for (String s : game)
@@ -122,12 +122,11 @@ public class Player {
     static int getTotalSelectedSpots() {
         return game.size();
     }
-
-
-    static String getMatchedSize() {
+    static String userSize() {
         return Integer.toString(list.size());
     }
-    static String getMatchedList() {
+
+    static String gameList() {
 
         if (list.size() == 0) {
             return "NILL";
@@ -143,7 +142,7 @@ public class Player {
         list.clear();
     }
 
-    static String getAmountResult() {
+    static String lotteryWinning() {
         String out;
 
         for (int i = 0; i < 20; i++) {

@@ -30,6 +30,14 @@ class MyTest {
 		int hello = Player.game.size();
 		assertEquals(1,Player.getSpot());
 	}
+	@Test
+	public void checkPlayerdraw(){
+		//Player draws = new Player();
+		Player.set_Draws(4);
+		assertEquals(4,Player.getDraws());
+	}
+	@Test
+	public void check
 
 
 }
