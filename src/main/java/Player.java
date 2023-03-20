@@ -154,4 +154,29 @@ public class Player {
         totalWinnings += Integer.parseInt(out);
         return out;
     }
+    static void setRandom(String ptext) {
+        int[] rnum = new int[80];
+
+        game.clear();
+
+        for (int i = 0; i < 80; i++) {
+            rnum[i] = i + 1;
+        }
+
+        Random rand = new Random();
+
+        // Randomly swap array values
+        for (int i = 0; i < rnum.length; i++) {
+            int index = rand.nextInt(rnum.length);
+            int temp = rnum[index];
+            rnum[index] = rnum[i];
+            rnum[i] = temp;
+        }
+
+        for (int i = 0; i < Integer.parseInt(ptext); i++) {
+            game.add(i, Integer.toString(rnum[i]));
+        }
+
+    }
+
 }

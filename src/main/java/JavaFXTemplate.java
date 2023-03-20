@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
@@ -271,6 +272,10 @@ public class JavaFXTemplate extends Application {
 		scene3 = new Scene(border2, 800, 640);
 
 		Button next = new Button("Start Drawing");
+		Label RandomText = new Label("Random Input");
+		ToggleButton RandomBox = new ToggleButton();
+		HBox checkBoxBox = new HBox(20);
+		checkBoxBox.getChildren().addAll(RandomText, RandomBox);
 		HBox menu3 = new HBox(20);
 		menu3.getChildren().add(menuBar2);
 		// user pick numbers from grid
@@ -332,6 +337,7 @@ public class JavaFXTemplate extends Application {
 			String str = sRB.getText();
 			selectedChoice.setText("Amount" + str);
 			if (Player.spotsSelect(Integer.valueOf(str)) == true && Player.getDraws() > 0) {
+				//&& Player.getDraws() > 0
 				Player.nextDraw();
 				RadioButton drawrb = (RadioButton) gamesRadioGroup.getSelectedToggle();
 				String drawstr = drawrb.getText();
@@ -341,6 +347,7 @@ public class JavaFXTemplate extends Application {
 				totalBet.setText("$" + Player.getplayBet() * Integer.parseInt(drawstr));
 				help.setText("Drawing!");
 				Player.draw();
+				Player.decreaseDraws();
 				Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
 					@Override
@@ -348,7 +355,7 @@ public class JavaFXTemplate extends Application {
 						drawOutput.setText(String.valueOf(Player.getDraw(k)));
 
 						// Looping until all draws are complete
-						Player.decreaseDraws();
+
 						k++;
 
 						// A Draw completes i.e 20 sub draws
@@ -407,6 +414,29 @@ public class JavaFXTemplate extends Application {
 				help.setText("Wrong Input");
 			}
 		});
+		RandomBox.setOnAction((ActionEvent) -> {
+
+			if (RandomBox.isSelected() == true) {
+				RadioButton sRB = (RadioButton) amountRadioGroup.getSelectedToggle();
+				String str = sRB.getText();
+				Player.setRandom(str);
+
+				// Prevent manual input
+				num.setDisable(false);
+				// Reset all nodes
+				for (i = 1; i <= 80; i++) {
+					ToggleButton checkbox = new ToggleButton();
+					checkbox = selectNumbers.get(i - 1);
+					if (checkbox.isSelected())
+						checkbox.fire();
+				}
+				num.setDisable(true);
+
+			} else {
+				num.setDisable(false);
+			}
+
+		});
 		VBox vbox1 = new VBox(10);
 		VBox vbox21 = new VBox(10);
 		GridPane slotResults = new GridPane();
@@ -441,7 +471,7 @@ public class JavaFXTemplate extends Application {
 		vbox21.getChildren().addAll(selectedChoiceText, selectedChoice);
 		HBox hbox12 = new HBox(30);
 		hbox12.getChildren().addAll(vbox1, vbox21,slotResults);
-		border2.getChildren().addAll(menu3,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
+		border2.getChildren().addAll(menu3,checkBoxBox,pick_num, num,next,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
 		dark.setOnAction((ActionEvent)->{
 			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
 			border2.setStyle("-fx-background-color: Gray");
