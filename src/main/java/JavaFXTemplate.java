@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
@@ -23,10 +22,10 @@ import java.util.ArrayList;
 
 public class JavaFXTemplate extends Application {
 	private static ArrayList<ToggleButton> selectNumbers = new ArrayList<ToggleButton>();
-	private final int TOTAL_DRAWINGS = 20;
-	private int i = 0,j = 0, k = 0;
+	private final int NUMDRAW = 20;
+	private int i = 0, k = 0;
 	Stage window;
-	Scene scene1, scene2, scene3, scene4, scene5, cuMrrentScene,currentScene;
+	Scene scene1, scene2, scene3, scene5,currentScene;
 	//public static TextArea t2;
 	public static Stage stage;
 
@@ -92,13 +91,9 @@ public class JavaFXTemplate extends Application {
 				"\n" +
 				"Select from one to ten numbers (spots) to play, and then select your numbers from 1-80 that correspond with how many numbers (spots) you want to \nplay. You can select the numbers manually or choose random for the Lottery computer to randomly select your numbers. \n" +
 				"\n" +
-				"2. Select wager amount\n" +
+				"2. Select number of drawings\n" +
 				"\n" +
-				"Select how much you want to wager on each drawing from $1 to $20.\n" +
-				"\n" +
-				"3. Select number of drawings\n" +
-				"\n" +
-				"To play the same numbers for multiple drawings, mark the number of drawings you want. \nYou can select up to 20 consecutive drawings with the same numbers.");
+				"To play the same numbers for multiple drawings, mark the number of drawings you want. \nYou can select up to 4 consecutive drawings with the same numbers.");
 		rules.setFont(Font.font("Verdana", 10));
 		rules.setFill(Color.LIGHTBLUE);
 
@@ -147,7 +142,38 @@ public class JavaFXTemplate extends Application {
 
 		HBox menu2 = new HBox(20);
 		menu2.getChildren().add(menuBar2);
+		//for scene3
+		Menu rulesMenu3 = new Menu("Rules");
+		Menu winOddsMenu3 = new Menu("Odds");
+		Menu exit3 = new Menu("Exit");
+		Menu newlook3 = new Menu("NewLook");
 
+		MenuItem exitconfirm3 = new MenuItem("Exit Confirm");
+		MenuItem ruleConfirm3 = new MenuItem("Rules Confirm");
+		MenuItem winOddsConfirm3 = new MenuItem("Odds Confirm");
+		MenuItem dark3 = new MenuItem("Dark Mode");
+		MenuItem light3 = new MenuItem("Light Mode");
+
+
+		exit3.getItems().add(exitconfirm3);
+		newlook3.getItems().addAll(dark3,light3);
+		winOddsMenu3.getItems().add(winOddsConfirm3);
+		rulesMenu3.getItems().add(ruleConfirm3);
+
+		exit3.setOnAction(e -> window.close());
+
+		rulesMenu3.setOnAction((ActionEvent)->{
+			currentScene = scene2;
+			window.setScene(scene1);
+		});
+		winOddsMenu3.setOnAction((ActionEvent)->{
+			currentScene = scene2;
+			window.setScene(scene1);
+		});
+		MenuBar menuBar3 = new MenuBar();
+		menuBar3.getMenus().addAll(rulesMenu3, winOddsMenu3,newlook3, exit3);
+		HBox menu3 = new HBox(20);
+		menu3.getChildren().add(menuBar3);
 
 		// updates:
 		// asks user to pick spots
@@ -215,6 +241,7 @@ public class JavaFXTemplate extends Application {
 
 		Button button = new Button("NEXT");
 		button.setOnAction(e -> window.setScene(scene3));
+		//disabling buttons
 		button.setDisable(true);
 		bet1.setDisable(true);
 		games1.setDisable(true);
@@ -277,8 +304,7 @@ public class JavaFXTemplate extends Application {
 		ToggleButton RandomBox = new ToggleButton();
 		HBox checkBoxBox = new HBox(20);
 		checkBoxBox.getChildren().addAll(RandomText, RandomBox);
-		HBox menu3 = new HBox(20);
-		menu3.getChildren().add(menuBar2);
+
 		// user pick numbers from grid
 		Label pick_num = new Label("Pick spots:");
 		pick_num.setFont(Font.font("Verdana", 10));
@@ -287,7 +313,7 @@ public class JavaFXTemplate extends Application {
 		GridPane num = new GridPane();
 		num.setAlignment(Pos.CENTER);
 
-		// need function that checks for numbers that ar ebeing selected
+		// setting up the grid
 		for (int i = 1; i <= 80; i++) {
 			ToggleButton num_select = new ToggleButton(String.valueOf(i));
 			num_select.setPrefSize(50, 50);
@@ -297,18 +323,17 @@ public class JavaFXTemplate extends Application {
 			selectNumbers.add(num_select);
 			num.add(num_select, (i - 1) % 10, (i - 1) / 10);
 		}
-		Text selectedChoice = new Text();
 		Text numSelected = new Text();
 		Text help = new Text();
-		Label drawNotice = new Label("Draw Result:");
-		Label drawOutput = new Label("NILL");
-		Label amountWonNotice = new Label("Amount Won:");
-		Label amountWonOutput = new Label("NILL");
-		Label selectedChoiceText = new Label("Choices Provided:");
-		Label selectedBetText = new Label("Bet");
-		Label selectedBet = new Label("NILL");
-		Label totalBetText = new Label("Total Bet");
-		Label totalBet = new Label("NILL");
+		Label drawResult = new Label("Draw Result:");
+		Label drawOutput = new Label("");
+		Label amountWonResult = new Label("Amount Won:");
+		Label amountWonOutput = new Label("");
+		Label selectedChoice = new Label("Choices Provided:");
+		Label selected_Bet = new Label("Bet");
+		Label selectedBet = new Label("");
+		Label total_Bet = new Label("Total Bet");
+		Label totalBet = new Label("");
 		Label drawsMatched = new Label("No. of Matched Items");
 		Label drawsMatchedList = new Label("Matched Items");
 		Label drawText = new Label("Draw");
@@ -317,37 +342,38 @@ public class JavaFXTemplate extends Application {
 		Label draw2 = new Label("2");
 		Label draw3 = new Label("3");
 		Label draw4 = new Label("4");
-		Label draw1Matched = new Label("NILL");
-		Label draw1MatchedList = new Label("NILL");
-		Label draw1Won = new Label("NILL");
-		Label draw2Matched = new Label("NILL");
-		Label draw2MatchedList = new Label("NILL");
-		Label draw2Won = new Label("NILL");
-		Label draw3Matched = new Label("NILL");
-		Label draw3MatchedList = new Label("NILL");
-		Label draw3Won = new Label("NILL");
-		Label draw4Matched = new Label("NILL");
-		Label draw4MatchedList = new Label("NILL");
-		Label draw4Won = new Label("NILL");
+		Label draw1Matched = new Label("0");
+		Label draw1MatchedList = new Label("0");
+		Label draw1Won = new Label("0");
+		Label draw2Matched = new Label("0");
+		Label draw2MatchedList = new Label("0");
+		Label draw2Won = new Label("0");
+		Label draw3Matched = new Label("0");
+		Label draw3MatchedList = new Label("0");
+		Label draw3Won = new Label("0");
+		Label draw4Matched = new Label("0");
+		Label draw4MatchedList = new Label("0");
+		Label draw4Won = new Label("0");
 		// need function that displays for numbers that are selected
 		HBox drawBox = new HBox(10);
-		drawBox.getChildren().addAll(drawNotice, drawOutput, amountWonNotice, amountWonOutput);
+		drawBox.getChildren().addAll(drawResult, drawOutput, amountWonResult, amountWonOutput);
 		next.setOnAction((ActionEvent) -> {
 
 			RadioButton sRB = (RadioButton) amountRadioGroup.getSelectedToggle();
 			String str = sRB.getText();
 			selectedChoice.setText("Amount" + str);
-			if (Player.spotsSelect(Integer.valueOf(str)) == true && Player.getDraws() > 0) {
-				//&& Player.getDraws() > 0
+			if (Player.spotsSelect(Integer.valueOf(str)) == true && Player.getDraws() > 0 ) {
+
 				Player.nextDraw();
 				RadioButton drawrb = (RadioButton) gamesRadioGroup.getSelectedToggle();
 				String drawstr = drawrb.getText();
-				numSelected.setText(String.valueOf("Selected spots"+Player.getTotalSelectedSpots()));
 				selectedChoice.setText(Player.userList());
+				numSelected.setText("Selected spots ->"+Player.getTotalSelectedSpots());
 				selectedBet.setText("$" + Player.getplayBet());
 				totalBet.setText("$" + Player.getplayBet() * Integer.parseInt(drawstr));
 				help.setText("Drawing!");
 				Player.draw();
+				//decrase draw everytime
 				Player.decreaseDraws();
 				Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
@@ -355,11 +381,8 @@ public class JavaFXTemplate extends Application {
 					public void handle(ActionEvent event) {
 						drawOutput.setText(String.valueOf(Player.getDraw(k)));
 
-						// Looping until all draws are complete
-
 						k++;
-
-						// A Draw completes i.e 20 sub draws
+						//sub draw
 						if (k == 20) {
 							String tempAmount;
 
@@ -374,6 +397,7 @@ public class JavaFXTemplate extends Application {
 
 							// Show results
 							tempAmount = Player.lotteryWinning();
+
 							amountWonOutput.setText("$" + Player.getTotalWinning());
 
 							if (Player.curDraw() == 1) {
@@ -396,25 +420,23 @@ public class JavaFXTemplate extends Application {
 								throw new RuntimeException("Nope Can't Do That");
 							}
 
-							// Reset
+							// reset
 							Player.resetDraw();
 						}
 					}
 				}));
-
-				// Reset printing draws position to zero
+				//draw position to zero
 				k = 0;
-
-				// 20 Draws
-				timeline.setCycleCount(TOTAL_DRAWINGS - k);
+				timeline.setCycleCount(NUMDRAW - k);
 				timeline.play();
 
 			}
 			else {
-				// do Warn User
+				// warn user if something is wrong 
 				help.setText("Wrong Input");
 			}
 		});
+		//setting up the random draw 
 		RandomBox.setOnAction((ActionEvent) -> {
 
 			if (RandomBox.isSelected() == true) {
@@ -422,9 +444,9 @@ public class JavaFXTemplate extends Application {
 				String str = sRB.getText();
 				Player.setRandom(str);
 
-				// Prevent manual input
+				// no user input
 				num.setDisable(false);
-				// Reset all nodes
+				//seeting up the buttons
 				for (i = 1; i <= 80; i++) {
 					ToggleButton checkbox = new ToggleButton();
 					checkbox = selectNumbers.get(i - 1);
@@ -440,6 +462,7 @@ public class JavaFXTemplate extends Application {
 		});
 		VBox vbox1 = new VBox(10);
 		VBox vbox21 = new VBox(10);
+//grid to place reselts for every draw 
 		GridPane slotResults = new GridPane();
 		slotResults.setHgap(30);
 		slotResults.setVgap(10);
@@ -468,25 +491,85 @@ public class JavaFXTemplate extends Application {
 		slotResults.add(draw4Matched, 1, 4, 1, 1);
 		slotResults.add(draw4MatchedList, 2, 4, 1, 1);
 		slotResults.add(draw4Won, 3, 4, 1, 1);
-		vbox1.getChildren().addAll(selectedBetText, selectedBet, totalBetText, totalBet);
-		vbox21.getChildren().addAll(selectedChoiceText, selectedChoice);
-		HBox hbox12 = new HBox(30);
-		hbox12.getChildren().addAll(vbox1, vbox21,slotResults);
+//setting where the bet results are for the scene
+		vbox1.getChildren().addAll(selected_Bet, selectedBet, total_Bet, totalBet);
+		vbox21.getChildren().addAll(selectedChoice, selectedChoice,slotResults);
+		HBox hboxall = new HBox(30);
+		hboxall.getChildren().addAll(vbox21,vbox1);
 		VBox border3 = new VBox(10);
 		scene5 = new Scene(border3, 800, 640);
-		Button new_game = new Button("New Game");
+		Button new_game = new Button("End Game");
+		Button reset_game = new Button("Reset Game");
+		HBox gamesreset = new HBox(20);
+		gamesreset.getChildren().addAll(new_game,reset_game);
+		border2.getChildren().addAll(menu3,checkBoxBox,pick_num, num,next,help,numSelected,drawBox,hboxall,gamesreset);
+		//event handler for reset scene
+		reset_game.setOnAction((ActionEvent) ->{
+			i = 0;
+			k = 0;
+			amountBox.setDisable(false);
+			betBox.setDisable(false);
+			gamesBox.setDisable(false);
+			button.setDisable(true);
+			next.setDisable(false);
+			RandomBox.setDisable(false);
+			drawOutput.setText("");
+			amountWonOutput.setText("");
+			selectedChoice.setText("");
+			selectedBet.setText("");
+			totalBet.setText("");
+			totalBet.setText("");
+			draw1Matched.setText("0");
+			draw1MatchedList.setText("0");
+			draw1Won.setText("0");
+			draw2MatchedList.setText("0");
+			draw2MatchedList.setText("0");
+			draw2Won.setText("0");
+			draw3Matched.setText("0");
+			draw3MatchedList.setText("0");
+			draw3Won.setText("0");
+			draw4Matched.setText("0");
+			draw4MatchedList.setText("0");
+			draw4Won.setText("0");
+			num.setDisable(false);
+			for (i = 1; i <= 80; i++) {
+				ToggleButton buttonreset = new ToggleButton();
+				buttonreset = selectNumbers.get(i - 1);
+				if (buttonreset.isSelected()) {
+					buttonreset.fire();
+				}
+				num.setDisable(true);
+			}
+
+			RandomBox.setDisable(false);
+			if (RandomBox.isSelected()) {
+				RandomBox.fire();
+
+			}
+
+
+			Player.reset_Game();
+
+
+			window.setScene(scene1);
+		});
+		//event handler for new end scene 
 		new_game.setOnAction(event -> window.setScene(scene5));
 		new_game.setAlignment(Pos.CENTER);
-		new_game.setStyle("-fx-text-fill:lightblue;-fx-font: 10px \"Serif\";");
+		new_game.setStyle("-fx-text-fill:Black;-fx-font: 15px \"Serif\";");
 
 		Text end_message = new Text();
 		end_message.setText("Thanks for playing!\n" +
 				"\n" +
+				"Have a Gambling Addiction?" +
+				"\n"+"\n"+
 				"Get Help:" +
+				"\n"+
 				"Hotline #: 1-800-522-4700");
 		end_message.setTextAlignment(TextAlignment.CENTER);
+		border3.setAlignment(Pos.CENTER);
 		border3.getChildren().addAll(end_message);
-		border2.getChildren().addAll(menu3,checkBoxBox,pick_num, num,next,new_game,help,selectedChoice,numSelected,amountWonOutput,drawBox,hbox12);
+//setting up the colors for newlook
 		dark.setOnAction((ActionEvent)->{
 			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
 			border2.setStyle("-fx-background-color: Gray");
@@ -508,13 +591,28 @@ public class JavaFXTemplate extends Application {
 				btn.setStyle("-fx-text-fill: #af804f; -fx-font: 18 \"Serif\"; -fx-border-color: #F0D2C1;");
 			}
 		});
+		dark3.setOnAction((ActionEvent)->{
+			borderPane.setStyle("-fx-padding:5; -fx-background-color:Gray");
+			border2.setStyle("-fx-background-color: Gray");
+			menuBar2.setStyle("-fx-background-color: DarkGrey");
+			for (i = 1; i <= 80; i++) {
+				ToggleButton btn = new ToggleButton();
+				btn = selectNumbers.get(i - 1);
+				btn.setStyle("-fx-text-fill: Grey; -fx-font: 16 \"Serif\"; -fx-border-color: Black;");
+			}
 
-		// last scene of game
-
-
-
-
-
+		});
+		light3.setOnAction((ActionEvent)-> {
+			borderPane.setStyle("-fx-padding:5; -fx-background-color: #F5F5DC ");
+			border2.setStyle("-fx-background-color: #D3B69C");
+			menuBar2.setStyle("-fx-background-color: White");
+			for (i = 1; i <= 80; i++) {
+				ToggleButton btn = new ToggleButton();
+				btn = selectNumbers.get(i - 1);
+				btn.setStyle("-fx-text-fill: #af804f; -fx-font: 18 \"Serif\"; -fx-border-color: #F0D2C1;");
+			}
+		});
+		//setting up the window
 		window.setScene(scene1);
 		window.setTitle("KENO");
 		window.show();

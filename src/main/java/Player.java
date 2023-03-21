@@ -141,6 +141,13 @@ public class Player {
     static void resetDraw() {
         list.clear();
     }
+    static void reset_Game() {
+        drawings = 20;
+        spot = 1;
+        game.clear();
+        list.clear();
+        counter = 0;
+    }
 
     static String lotteryWinning() {
         String out;
