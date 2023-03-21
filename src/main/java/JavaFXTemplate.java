@@ -493,7 +493,7 @@ public class JavaFXTemplate extends Application {
 		slotResults.add(draw4Won, 3, 4, 1, 1);
 //setting where the bet results are for the scene
 		vbox1.getChildren().addAll(selected_Bet, selectedBet, total_Bet, totalBet);
-		vbox21.getChildren().addAll(selectedChoice, selectedChoice,slotResults);
+		vbox21.getChildren().addAll(selectedChoice,slotResults);
 		HBox hboxall = new HBox(30);
 		hboxall.getChildren().addAll(vbox21,vbox1);
 		VBox border3 = new VBox(10);
@@ -538,12 +538,13 @@ public class JavaFXTemplate extends Application {
 				if (buttonreset.isSelected()) {
 					buttonreset.fire();
 				}
-				num.setDisable(true);
+
 			}
 
 			RandomBox.setDisable(false);
 			if (RandomBox.isSelected()) {
 				RandomBox.fire();
+
 
 			}
 

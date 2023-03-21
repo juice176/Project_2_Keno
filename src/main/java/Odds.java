@@ -1,5 +1,5 @@
 public class Odds {
-    public static String gameChart(int spots, int matched, int bet) {
+    public static String oddchart(int spots, int matched, int bet) {
         int amount = 0;
 
         switch (spots) {

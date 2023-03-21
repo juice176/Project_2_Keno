@@ -4,7 +4,7 @@ import java.util.Random;
 public class Player {
     static ArrayList<String> game = new ArrayList<String>(); // players user input
 
-    private static ArrayList<String> list = new ArrayList<String>();//matched outcome
+    static ArrayList<String> list = new ArrayList<String>();//matched outcome
     public static int playBet = 1;
     public static int spot = 1;
     public static int drawings = 20;
@@ -157,7 +157,7 @@ public class Player {
         }
         list.retainAll(game);
 
-        out = Odds.gameChart(game.size(), list.size(), spot);
+        out = Odds.oddchart(game.size(), list.size(), spot);
         totalWinnings += Integer.parseInt(out);
         return out;
     }

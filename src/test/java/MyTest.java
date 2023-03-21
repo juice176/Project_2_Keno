@@ -44,8 +44,33 @@ class MyTest {
 	}
 	@Test
 	public void checkselectedspots(){
+		Player.reset_Game();
 		Player.storecardSelection("1",true);
 		assertEquals("1, ", Player.userList());
+
+	}
+	@Test
+	public void checkselectedspots1(){
+		Player.reset_Game();
+		Player.storecardSelection("4",true);
+		Player.storecardSelection("10",true);
+		assertEquals("4, 10, ", Player.userList());
+
+	}
+	@Test
+	public void checkselectedspots10(){
+		Player.reset_Game();
+		Player.storecardSelection("1,2,3,4 ",true);
+		assertEquals("1,2,3,4 , ", Player.userList());
+
+	}
+	@Test
+	public void checkselectedspots2(){
+		Player.reset_Game();
+		Player.storecardSelection("1",true);
+		Player.storecardSelection("1",true);
+		Player.storecardSelection("1",true);
+		assertEquals("1, 1, 1, ", Player.userList());
 
 	}
 	@Test
@@ -56,6 +81,12 @@ class MyTest {
 		assertEquals(2,game.size());
 	}
 	@Test
+	public void checkusersize1(){
+		ArrayList game = new ArrayList<>();
+		game.add("1");
+		assertEquals(1,game.size());
+	}
+	@Test
 	public void checkspotsselect(){
 		ArrayList game2 = new ArrayList<>();
 		game2.add("1");
@@ -64,10 +95,39 @@ class MyTest {
 
 	}
 	@Test
+	public void checkspotsselect1(){
+		ArrayList game2 = new ArrayList<>();
+		game2.add("1");
+
+		game2.add("1");
+
+		game2.add("1");
+
+		game2.add("1");
+
+		game2.add("1");
+
+		assertFalse(Player.spotsSelect(5));
+
+	}
+	@Test
+	public void checkspotsselect2(){
+		ArrayList game2 = new ArrayList<>();
+		game2.add("1");
+		assertFalse(Player.spotsSelect(1));
+
+	}
+	@Test
 	public void checknextdraw(){
 		Player.set_Draws(1);
 		Player.decreaseDraws();
 		assertEquals(0,Player.getDraws());
+	}
+	@Test
+	public void checknextdraw2(){
+		Player.set_Draws(3);
+		Player.decreaseDraws();
+		assertEquals(2,Player.getDraws());
 	}
 	@Test
 	public void checkcurdraw(){
@@ -96,17 +156,31 @@ class MyTest {
 
 	}
 
-	//@Test
-	//public void checkreset(){
-	//	assertEquals();
+	@Test
+	public void checkreset(){
+		Player.reset_Game();
+		assertEquals(20, Player.getDraws());
 
-	//}
+	}
+	@Test
+	public void checkreset2(){
+		Player.reset_Game();
+		assertEquals(1,Player.getSpot());
 
-	//@Test
-	//public void checkgame(){
-	//	assertEquals();
+	}
 
-	//}
+	@Test
+	public void checkgame(){
+		Player.reset_Game();
+		assertEquals(0,Player.game.size());
+
+	}
+	@Test
+	public void checkgame2(){
+		Player.reset_Game();
+		assertEquals(0,Player.list.size());
+
+	}
 
 
 
