@@ -1,2 +1,3 @@
 # Project_2_Keno
-hi
+Lottery style game 
+
